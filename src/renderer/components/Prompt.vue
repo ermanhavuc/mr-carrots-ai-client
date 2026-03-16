@@ -1844,6 +1844,10 @@ defineExpose({
   color: var(--prompt-icon-color);
   cursor: default;
   user-select: none;
+
+  span {
+    font-size: var(--font-size-13);
+  }
 }
 
 </style>
