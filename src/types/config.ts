@@ -34,6 +34,9 @@ export type Configuration = {
 export type WitsyEngineCreateOpts = EngineCreateOpts & {
   keepAlive?: string
   providerOrder?: string
+  providerSort?: 'price' | 'throughput' | 'latency'
+  providerDataCollection?: 'allow' | 'deny'
+  providerAllowFallbacks?: boolean
 }
 
 export type EngineConfig = WitsyEngineCreateOpts & {
@@ -48,6 +51,11 @@ export type EngineConfig = WitsyEngineCreateOpts & {
 export type CustomEngineConfig = EngineConfig & {
   label: string
   api: string
+}
+
+export type GoogleEngineConfig = EngineConfig & {
+  safetySettings?: string
+  defaultThinkingBudget?: number
 }
 
 export type ProxyMode = 'default' | 'bypass' | 'custom'

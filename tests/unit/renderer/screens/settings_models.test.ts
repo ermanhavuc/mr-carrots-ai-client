@@ -139,6 +139,11 @@ test('google settings', async () => {
   expect(store.config.engines.google.disableTools).toBeFalsy()
   await google.find('[name=disableTools]').setValue(true)
   expect(store.config.engines.google.disableTools).toBeTruthy()
+  await google.find('[name=safetySettings]').setValue('BLOCK_NONE')
+  expect((store.config.engines.google as any).safetySettings).toBe('BLOCK_NONE')
+  await google.find('[name=defaultThinkingBudget]').setValue('1024')
+  await google.find('[name=defaultThinkingBudget]').trigger('change')
+  expect((store.config.engines.google as any).defaultThinkingBudget).toBe(1024)
 })
 
 test('xai settings', async () => {
@@ -294,6 +299,12 @@ test('openrouter settings', async () => {
   expect(store.config.engines.openrouter.disableTools).toBeFalsy()
   await openrouter.find('[name=disableTools]').setValue(true)
   expect(store.config.engines.openrouter.disableTools).toBeTruthy()
+  await openrouter.find('[name=providerSort]').setValue('throughput')
+  expect(store.config.engines.openrouter.providerSort).toBe('throughput')
+  await openrouter.find('[name=providerDataCollection]').setValue('deny')
+  expect(store.config.engines.openrouter.providerDataCollection).toBe('deny')
+  await openrouter.find('[name=providerAllowFallbacks]').setValue(false)
+  expect(store.config.engines.openrouter.providerAllowFallbacks).toBe(false)
 })
 
 test('groq settings', async () => {
