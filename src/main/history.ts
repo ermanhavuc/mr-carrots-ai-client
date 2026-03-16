@@ -11,6 +11,9 @@ import { kHistoryVersion } from '../consts'
 
 export const kUnusedDelay = 3600000
 
+// Cache full history in memory for lazy message loading
+let cachedHistory: { workspaceId: string, history: History } | null = null
+
 const monitor: Monitor = new Monitor(() => {
   //console.log('History file modified')
   emitIpcEventToAll('file-modified', 'history')
@@ -26,7 +29,7 @@ export const attachmentsFilePath = (app: App, workspaceId: string): string => {
   return path.join(workspacePath, 'images')
 }
 
-export const loadHistory = async (app: App, workspaceId: string): Promise<History> => {
+export const loadHistory = (app: App, workspaceId: string): History => {
 
   // needed
   const filepath = historyFilePath(app, workspaceId) 
@@ -99,8 +102,9 @@ export const loadHistory = async (app: App, workspaceId: string): Promise<Histor
     // start monitors
     monitor.start(filepath)
 
-    // done
+    // cache and done
     history.version = kHistoryVersion
+    cachedHistory = { workspaceId, history }
     return history
   
   } catch (error) {
@@ -120,6 +124,19 @@ export const saveHistory = (app: App, workspaceId: string, history: History) => 
       return
     }
 
+    // merge unloaded chats from cache before writing
+    if (cachedHistory?.workspaceId === workspaceId) {
+      const loadedIds = new Set(history.chats.map((c: Chat) => c.uuid))
+      for (const cached of cachedHistory.history.chats) {
+        if (!loadedIds.has(cached.uuid)) {
+          history.chats.push(cached)
+        }
+      }
+    }
+
+    // update cache
+    cachedHistory = { workspaceId, history }
+
     // local
     const filepath = historyFilePath(app, workspaceId) 
     fs.writeFileSync(filepath, JSON.stringify(history, null, 2))
@@ -127,6 +144,28 @@ export const saveHistory = (app: App, workspaceId: string, history: History) => 
   } catch (error) {
     console.log('Error saving history data', error)
   }
+}
+
+// Return history with chats stripped to metadata only (no messages)
+export const loadHistoryMetadata = (app: App, workspaceId: string): History => {
+  const history = loadHistory(app, workspaceId)
+  if (!history) return history
+  return {
+    ...history,
+    chats: history.chats.map((chat: Chat) => ({
+      ...chat,
+      messages: [] as any[],
+    })),
+  }
+}
+
+// Return messages for a specific chat from cache or disk
+export const loadChatMessages = (app: App, workspaceId: string, chatId: string): any[] => {
+  if (cachedHistory?.workspaceId !== workspaceId) {
+    loadHistory(app, workspaceId)
+  }
+  const chat = cachedHistory?.history.chats.find((c: Chat) => c.uuid === chatId)
+  return chat?.messages || []
 }
 
 const cleanAttachmentsFolder = (app: App, workspaceId: string, history: History) => {

@@ -21,6 +21,27 @@ export default defineConfig((env) => {
     base: './',
     build: {
       outDir: `.vite/renderer/${name}`,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules/mermaid') || id.includes('node_modules/@mermaid-js')) {
+              return 'vendor-mermaid'
+            }
+            if (id.includes('node_modules/katex')) {
+              return 'vendor-katex'
+            }
+            if (id.includes('node_modules/highlight.js') || id.includes('node_modules/lowlight')) {
+              return 'vendor-highlight'
+            }
+            if (id.includes('node_modules/@tiptap') || id.includes('node_modules/prosemirror')) {
+              return 'vendor-tiptap'
+            }
+            if (id.includes('node_modules/vega') || id.includes('node_modules/vega-lite')) {
+              return 'vendor-vega'
+            }
+          }
+        }
+      }
     },
     plugins: [
       pluginExposeRenderer(name),

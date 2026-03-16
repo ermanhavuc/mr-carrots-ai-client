@@ -160,19 +160,19 @@ const onClose = () => {
   emit('close')
 }
 
-const onReplace = () => {
-  if (!window.api.automation.replace(props.message.content, props.sourceApp)) {
+const onReplace = async () => {
+  if (!await window.api.automation.replace(props.message.content, props.sourceApp)) {
     Dialog.alert(t('common.errorCopyClipboard'), t('common.tryAgain'))
   }
 }
 
-const onInsert = () => {
+const onInsert = async () => {
 
   // when replace is hidden it means that we do not if text is selected or not
   // so insert becomes replace. when replace is shown, insert is an insert
   const rc = props.showReplace ?
-    window.api.automation.insert(props.message.content, props.sourceApp) :
-    window.api.automation.replace(props.message.content, props.sourceApp)
+    await window.api.automation.insert(props.message.content, props.sourceApp) :
+    await window.api.automation.replace(props.message.content, props.sourceApp)
   if (!rc) {
     Dialog.alert(t('common.errorCopyClipboard'), t('common.tryAgain'))
   }

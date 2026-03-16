@@ -110,7 +110,7 @@ const historyProvider = () => store.history.quickPrompts
 provide('showReasoning', ref(false))
 provide('onToggleReasoning', () => {})
 
-onMounted(() => {
+onMounted(async () => {
 
   // init chat
   initChat()
@@ -125,20 +125,20 @@ onMounted(() => {
 
   // query params
   if (props.extra) {
-    processQueryParams(props.extra)
+    await processQueryParams(props.extra)
   }
 
 })
 
-const onShow = (params?: anyDict) => {
-  processQueryParams(params)
+const onShow = async (params?: anyDict) => {
+  await processQueryParams(params)
 }
 
 const onDictate = () => {
   prompt.value?.startDictation()
 }
 
-const processQueryParams = (params?: anyDict) => {
+const processQueryParams = async (params?: anyDict) => {
 
   // log
   console.log('[anywr] Processing query params', JSON.stringify(params))
@@ -188,7 +188,7 @@ const processQueryParams = (params?: anyDict) => {
 
   // source app
   if (userPrompt?.length && params?.sourceApp) {
-    sourceApp.value = window.api.file.getAppInfo(params.sourceApp.path)
+    sourceApp.value = await window.api.file.getAppInfo(params.sourceApp.path)
     if (sourceApp.value) {
       hiddenPrompt = userPrompt
       userPrompt = null

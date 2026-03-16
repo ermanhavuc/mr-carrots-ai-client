@@ -199,7 +199,7 @@ export default class Generator {
         })
 
         // we need this to catch errors in the for-await loop
-         
+
         try {
           for await (const msg of stream) {
             // Engine will stop if signal aborted

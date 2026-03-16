@@ -68,7 +68,7 @@ const updateModelReady = () => {
 
 const saveDescription = () => {
   if (props.selectedRepo) {
-    window.api.docrepo.update(
+    void window.api.docrepo.update(
       props.selectedRepo.uuid,
       props.selectedRepo.name,
       description.value

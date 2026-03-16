@@ -72,6 +72,8 @@ export const CONFIG = {
 
 export const HISTORY = {
   LOAD: 'history-load',
+  LOAD_METADATA: 'history-load-metadata',
+  LOAD_CHAT_MESSAGES: 'history-load-chat-messages',
   SAVE: 'history-save',
 } as const;
 

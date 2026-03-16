@@ -116,7 +116,7 @@ const onShow = async (params: any) => {
     try {
       sourceApp.value = JSON.parse(params.sourceApp)
       if (sourceApp.value?.path) {
-        appInfo.value = window.api.file.getAppInfo(sourceApp.value.path)
+        appInfo.value = await window.api.file.getAppInfo(sourceApp.value.path)
       }
     } catch (error) {
       console.error('Error parsing sourceApp', error)
@@ -315,7 +315,7 @@ const transcribeAndInsert = async (audioBlob: Blob) => {
 
   // copy to clipboard if enabled
   if (text && store.config.stt.quickDictation?.copyToClipboard) {
-    window.api.clipboard.writeText(text)
+    await window.api.clipboard.writeText(text)
   }
 
   // close window, release focus, and paste text

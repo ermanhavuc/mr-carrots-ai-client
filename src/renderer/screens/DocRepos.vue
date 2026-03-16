@@ -179,7 +179,7 @@ const onRenameRepo = async (docRepo: DocumentBase) => {
     showCancelButton: true,
   })
   if (name) {
-    window.api.docrepo.update(docRepo.uuid, name.trim(), docRepo.description)
+    await window.api.docrepo.update(docRepo.uuid, name.trim(), docRepo.description)
   }
 }
 
@@ -192,7 +192,7 @@ const onDeleteRepo = (docRepo: DocumentBase) => {
     showCancelButton: true,
   }).then((result) => {
     if (result.isConfirmed) {
-      window.api.docrepo.delete(docRepo.uuid)
+      void window.api.docrepo.delete(docRepo.uuid)
     }
   })
 }

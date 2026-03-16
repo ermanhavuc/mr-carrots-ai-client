@@ -3,6 +3,7 @@ import { LlmModelOpts } from 'multi-llm-ts'
 import { Chat as ChatBase } from 'types/index'
 import { ToolSelection } from 'types/llm'
 import Message from './message'
+import { reactive, shallowReactive } from 'vue'
 
 export const DEFAULT_TITLE = 'New Chat'
 
@@ -21,6 +22,7 @@ export default class Chat implements ChatBase {
   locale?: string
   docrepos?: string[]
   messages: Message[]
+  messagesLoaded: boolean
   temporary: boolean
 
   constructor(title?: string) {
@@ -32,7 +34,8 @@ export default class Chat implements ChatBase {
     this.lastModified = Date.now()
     this.disableStreaming = false
     this.tools = null
-    this.messages = []
+    this.messages = shallowReactive([])
+    this.messagesLoaded = true
     this.temporary = false  
   }
 
@@ -50,11 +53,31 @@ export default class Chat implements ChatBase {
     chat.modelOpts = obj.modelOpts || undefined
     chat.locale = obj.locale || undefined
     chat.docrepos = obj.docrepos?.length ? obj.docrepos : (obj.docrepo ? [obj.docrepo] : undefined)
-    chat.messages = []
+    chat.messages = shallowReactive([])
     for (const msg of obj.messages) {
       const message = Message.fromJson(msg)
       chat.messages.push(message)
     }
+    return chat
+  }
+
+  // Create a Chat with metadata only (no messages loaded)
+  static fromMetadata(obj: any): Chat {
+    const chat = new Chat()
+    chat.uuid = obj.uuid || crypto.randomUUID()
+    chat.title = obj.title
+    chat.createdAt = obj.createdAt
+    chat.lastModified = obj.lastModified || obj.createdAt
+    chat.engine = obj.engine || undefined
+    chat.model = obj.model || undefined
+    chat.instructions = obj.instructions || obj.prompt || undefined
+    chat.disableStreaming = obj.disableStreaming
+    chat.tools = obj.disableTools === true ? [] : (obj.tools || null)
+    chat.modelOpts = obj.modelOpts || undefined
+    chat.locale = obj.locale || undefined
+    chat.docrepos = obj.docrepos?.length ? obj.docrepos : (obj.docrepo ? [obj.docrepo] : undefined)
+    chat.messages = shallowReactive([])
+    chat.messagesLoaded = false
     return chat
   }
 
@@ -76,8 +99,8 @@ export default class Chat implements ChatBase {
     this.locale = obj.locale
     this.docrepos = obj.docrepos?.length ? obj.docrepos : (obj.docrepo ? [obj.docrepo] : undefined)
 
-    // messages
-    if (this.messages.length < obj.messages.length) {
+    // messages (skip if not loaded — will be loaded on demand)
+    if (this.messagesLoaded && this.messages.length < obj.messages.length) {
       //console.log(`patching ${obj.messages.length - this.messages.length} messages`)
       const messages = obj.messages.slice(this.messages.length)
       for (const msg of messages) {
@@ -125,7 +148,10 @@ export default class Chat implements ChatBase {
   }
 
   addMessage(message: Message): void {
-    this.messages.push(message)
+    // Wrap transient (streaming) messages in reactive() so Vue's deep watches
+    // in MessageItemBody track content updates during generation.
+    // Historical messages remain raw — they never change after load.
+    this.messages.push(message.transient ? reactive(message) : message)
     this.lastModified = Date.now()
   }
 
@@ -148,7 +174,7 @@ export default class Chat implements ChatBase {
       for (let i = index; i < this.messages.length; i++) {
         this.messages[i].delete()
       }
-      this.messages = this.messages.slice(0, index)
+      this.messages = shallowReactive(this.messages.slice(0, index))
       this.lastModified = Date.now()
     }
   }
@@ -157,7 +183,7 @@ export default class Chat implements ChatBase {
     const fork = Chat.fromJson(this)
     fork.uuid = crypto.randomUUID()
     fork.lastModified = Date.now()
-    fork.messages = []
+    fork.messages = shallowReactive([])
     for (const msg of this.messages) {
       fork.messages.push(Message.fromJson(msg))
       fork.lastMessage().uuid = crypto.randomUUID()

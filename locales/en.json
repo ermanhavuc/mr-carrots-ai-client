@@ -2964,6 +2964,7 @@
       "darkTint": "Dark tint",
       "forceLocale": "Ask model to always speak this language (results may vary)",
       "hideOnStartup": "Hide main window on start",
+      "checkForUpdates": "Automatically check for updates",
       "keepInStatusBar": "Keep in Status Bar",
       "lastOneUsed": "Last one used",
       "lightTint": "Light tint",

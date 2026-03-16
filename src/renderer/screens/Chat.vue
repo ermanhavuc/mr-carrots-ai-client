@@ -392,6 +392,8 @@ const updateChatEngineModel = () => {
 }
 
 const onSelectChat = (chat: Chat) => {
+  // lazy-load messages if not yet loaded
+  store.loadChatMessages(chat)
   // switch to session for this chat (creates if needed, cleans up old idle session)
   setActiveSession(chat.uuid, chat)
   nextTick(() => {

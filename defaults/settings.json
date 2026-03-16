@@ -1,4 +1,3 @@
-
 {
   "workspaceId": "00000000-0000-0000-0000-000000000000",
   "general": {
@@ -7,10 +6,10 @@
     "onboardingDone": false,
     "keepRunning": true,
     "hideOnStartup": false,
+    "checkForUpdates": true,
     "proxyMode": "default",
     "customProxy": "",
-    "tips": {
-    },
+    "tips": {},
     "confirm": {
       "retryGeneration": true
     },
@@ -153,7 +152,7 @@
     "excludePatterns": ".*,node_modules,__pycache__,venv"
   },
   "stt": {
-    "engine": "openai", 
+    "engine": "openai",
     "model": "gpt-4o-transcribe",
     "locale": "",
     "vocabulary": [],
@@ -482,10 +481,7 @@
     }
   },
   "skills": {
-    "locations": [
-      "~/.claude/skills",
-      "~/.agents/skills"
-    ]
+    "locations": ["~/.claude/skills", "~/.agents/skills"]
   },
   "plugins": {
     "browse": {

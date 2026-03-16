@@ -38,6 +38,11 @@ chats[1].messages[1].model = 'model'
 beforeAll(() => {
   useWindowMock()
   window.api.history.load = vi.fn(() => ({ version: kHistoryVersion, folders: [], chats: chats, quickPrompts: [] }))
+  window.api.history.loadMetadata = vi.fn(() => ({ version: kHistoryVersion, folders: [], chats: chats.map(c => ({ ...JSON.parse(JSON.stringify(c)), messages: [] })), quickPrompts: [] }))
+  window.api.history.loadChatMessages = vi.fn((_, chatId) => {
+    const chat = chats.find(c => c.uuid === chatId)
+    return chat ? JSON.parse(JSON.stringify(chat.messages)) : []
+  })
 })
 
 beforeEach(() => {
@@ -60,7 +65,7 @@ test('Load', async () => {
   expect(window.api.config?.load).toHaveBeenCalled()
   expect(window.api.experts?.load).toHaveBeenCalled()
   expect(window.api.commands?.load).toHaveBeenCalled()
-  expect(window.api.history?.load).toHaveBeenCalled()
+  expect(window.api.history?.loadMetadata).toHaveBeenCalled()
   expect(store.config).toStrictEqual(defaultSettings)
   expect(store.history.folders).toHaveLength(0)
   expect(store.history.chats).toHaveLength(2)
@@ -93,54 +98,67 @@ test('Load history', async () => {
   store.load()
   expect(store.history.chats).toHaveLength(2)
   expect(store.history.chats[0].messages).toHaveLength(0)
-  expect(store.history.chats[1].messages).toHaveLength(2)
+  expect(store.history.chats[0].messagesLoaded).toBe(false)
+  expect(store.history.chats[1].messages).toHaveLength(0)
+  expect(store.history.chats[1].messagesLoaded).toBe(false)
 })
 
 test('Save history', async () => {
+  store.load()
+  // explicitly load chat[1] so it has full messages; chat[0] stays unloaded
+  store.loadChatMessages(store.history.chats[1])
   store.saveHistory()
   expect(window.api.history?.save).toHaveBeenCalled()
-  expect(window.api.history?.save).toHaveBeenLastCalledWith(kDefaultWorkspaceId, {
-    version: 1,
-    folders: [],
-    chats: [ {
+  const savedArgs = (window.api.history?.save as ReturnType<typeof vi.fn>).mock.lastCall
+  const [wsId, savedHistory] = savedArgs
+  expect(wsId).toBe(kDefaultWorkspaceId)
+  expect(savedHistory.version).toBe(1)
+  // unloaded chat[0] is preserved for main-process cache merge
+  expect(savedHistory.chats).toEqual(expect.arrayContaining([
+    expect.objectContaining({ uuid: chats[0].uuid, messagesLoaded: false, messages: [] })
+  ]))
+  // loaded chat[1] is saved with full messages
+  expect(savedHistory.chats).toEqual(expect.arrayContaining([
+    expect.objectContaining({
       uuid: '123',
       engine: 'engine',
       model: 'model',
-      disableStreaming: false,
-      tools: null,
-      temporary: false,
-      modelOpts: { temperature: 1 },
-      messages: [
-        {
-          uuid: '1', engine: null, model: null, createdAt: 0, role: 'system', type: 'text', content: 'Hi', reasoning: null,
-          execMode: 'prompt', toolCalls: [], attachments: [], transient: false, uiOnly: false, edited: false
-        },
-        {
-          uuid: '2', engine: 'engine', model: 'model', createdAt: 0, role: 'user', type: 'text', content: 'Hello', reasoning: null,
-          execMode: 'prompt', toolCalls: [], attachments: [], transient: false, uiOnly: false, edited: false
-        }
-      ]
-    } ],
-    quickPrompts: [],
-  })
+      messagesLoaded: true,
+      messages: expect.arrayContaining([
+        expect.objectContaining({ uuid: '1', content: 'Hi' }),
+        expect.objectContaining({ uuid: '2', content: 'Hello' }),
+      ])
+    })
+  ]))
+})
+
+test('Load chat messages on demand', async () => {
+  store.load()
+  const chat = store.history.chats[1]
+  expect(chat.messagesLoaded).toBe(false)
+  expect(chat.messages).toHaveLength(0)
+  store.loadChatMessages(chat)
+  expect(chat.messagesLoaded).toBe(true)
+  expect(chat.messages).toHaveLength(2)
+  expect(chat.messages[0].content).toBe('Hi')
+  expect(chat.messages[1].content).toBe('Hello')
 })
 
 test('Merge history', async () => {
   store.load()
   expect(store.history.chats).toHaveLength(2)
-  expect(store.history.chats[1].messages).toHaveLength(2)
+  expect(store.history.chats[1].messages).toHaveLength(0)
   chats.push(new Chat())
   chats[1].messages.push(new Message('user', ''))
   listeners.map(l => l('history'))
   expect(store.history.chats).toHaveLength(3)
-  expect(store.history.chats[1].messages).toHaveLength(3)
+  // messages still not loaded for existing chat (lazy)
+  expect(store.history.chats[1].messages).toHaveLength(0)
   chats.splice(2, 1)
   listeners.map(l => l('history'))
   expect(store.history.chats).toHaveLength(2)
-  expect(store.history.chats[1].messages).toHaveLength(3)
+  expect(store.history.chats[1].messages).toHaveLength(0)
 })
-
-// initChatWithDefaults
 
 test('initChatWithDefaults applies defaults when they exist', () => {
   store.load()

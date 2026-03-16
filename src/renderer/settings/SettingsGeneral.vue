@@ -55,6 +55,10 @@
         <input type="checkbox" id="keep-running" v-model="keepRunning" @change="save" />
         <label for="keep-running">{{ t('settings.general.keepInStatusBar') }}</label>
       </div>
+      <div class="form-field horizontal check-for-updates">
+        <input type="checkbox" id="check-for-updates" v-model="checkForUpdates" @change="save" />
+        <label for="check-for-updates">{{ t('settings.general.checkForUpdates') }}</label>
+      </div>
     </main>
   </div>
 </template>
@@ -74,6 +78,7 @@ const localeUI = ref(null)
 const runAtLogin = ref(false)
 const hideOnStartup = ref(false)
 const keepRunning = ref(false)
+const checkForUpdates = ref(true)
 
 const setAppearanceTheme = (value: string) => {
   appearance.value = value
@@ -90,6 +95,7 @@ const load = () => {
   runAtLogin.value = window.api.runAtLogin.get()
   hideOnStartup.value = store.config.general.hideOnStartup
   keepRunning.value = store.config.general.keepRunning
+  checkForUpdates.value = store.config.general.checkForUpdates ?? true
 }
 
 const onResetTips = () => {
@@ -105,6 +111,7 @@ const save = () => {
   window.api.runAtLogin.set(runAtLogin.value)
   store.config.general.hideOnStartup = hideOnStartup.value
   store.config.general.keepRunning = keepRunning.value
+  store.config.general.checkForUpdates = checkForUpdates.value
   store.saveSettings()
 }
 

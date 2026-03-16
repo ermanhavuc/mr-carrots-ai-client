@@ -24,7 +24,7 @@ export const saveFileContents = (extension: string, contents: string) => {
   return fileUrl
 }
   
-export const download = (url: string) => {
+export const download = async (url: string): Promise<string> => {
 
   // get extension from url
   let extension = url.split(/[#?]/)[0].split('.').pop().trim()
@@ -33,7 +33,7 @@ export const download = (url: string) => {
   }
 
   // call main
-  const fileUrl = window.api.file.download({
+  const fileUrl = await window.api.file.download({
     url: url,
     properties: {
       filename: `${uuidv4()}.${extension}`,

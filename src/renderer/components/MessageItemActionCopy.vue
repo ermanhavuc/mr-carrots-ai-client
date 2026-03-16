@@ -23,7 +23,7 @@ const props = defineProps({
 
 const copyLabel = ref(t('common.copy'))
 
-const onCopy = (event: MouseEvent) => {
+const onCopy = async (event: MouseEvent) => {
   if (props.message.type == 'text') {
 
     let textToCopy = removeMarkup(props.message.content)
@@ -38,7 +38,7 @@ const onCopy = (event: MouseEvent) => {
     }
     
     // try both ways
-    if (!window.api.clipboard.writeText(textToCopy)) {
+    if (!await window.api.clipboard.writeText(textToCopy)) {
       navigator.clipboard.writeText(textToCopy)
         .catch(err => {
           Dialog.alert(t('common.errorCopyClipboard'), t('common.tryAgain'))

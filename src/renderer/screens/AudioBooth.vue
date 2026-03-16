@@ -538,8 +538,8 @@ const onClear = () => {
   refocus()
 }
 
-const onCopy = () => {
-  window.api.clipboard.writeText(transcription.value)
+const onCopy = async () => {
+  await window.api.clipboard.writeText(transcription.value)
   if (window.api.clipboard.readText() != transcription.value) {
     Dialog.alert(t('transcribe.errors.copy'))
     return false

@@ -230,9 +230,9 @@ const jsonFrame = (frame: WebSocketFrame) => {
   }
 }
 
-const copyData = (data: string) => {
+const copyData = async (data: string) => {
   copying.value = true
-  window.api.clipboard.writeText(data)
+  await window.api.clipboard.writeText(data)
   setTimeout(() => {
     copying.value = false
   }, 1000)

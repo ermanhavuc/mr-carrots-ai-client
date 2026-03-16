@@ -1,5 +1,6 @@
 import { BrowserWindow } from 'electron';
 import { electronStore, createWindow, ensureOnCurrentScreen, titleBarOptions } from './index';
+import { enableNetworkInterception, disableNetworkInterception } from '../network';
 
 const storeBoundsId = 'debug.bounds'
 
@@ -37,7 +38,11 @@ export const openDebugWindow = (): void => {
     // handle window close
     debugWindow.on('closed', () => {
       debugWindow = null;
+      disableNetworkInterception();
     });
+
+    // attach network interception to all windows
+    enableNetworkInterception();
   
   }
 

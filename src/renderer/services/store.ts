@@ -1,11 +1,12 @@
 
 import { kHistoryVersion } from '@/consts'
 import Chat from '@models/chat'
+import Message from '@models/message'
 import features from '@root/defaults/features.json'
 import { Configuration } from 'types/config'
 import { Folder, History, Store, StoreEvent } from 'types/index'
 import { Workspace } from 'types/workspace'
-import { reactive } from 'vue'
+import { reactive, shallowReactive } from 'vue'
 import { loadAgents } from './agents'
 import { loadCommands } from './commands'
 import LlmFactory, { ILlmManager } from './llms/llm'
@@ -244,6 +245,13 @@ export const store: Store = reactive({
   //   store.saveHistory()
   // },
 
+  loadChatMessages: (chat: Chat): void => {
+    if (chat.messagesLoaded) return
+    const messages = window.api.history.loadChatMessages(store.config.workspaceId, chat.uuid)
+    chat.messages = shallowReactive(messages.map((msg: any) => Message.fromJson(msg)))
+    chat.messagesLoaded = true
+  },
+
   saveHistory: (): void => {
 
     try {
@@ -258,7 +266,7 @@ export const store: Store = reactive({
         version: store.history.version,
         folders: JSON.parse(JSON.stringify(store.history.folders)),
         chats: JSON.parse(JSON.stringify(store.history.chats)).filter((chat: Chat) => {
-          return chat.messages.length > 1 || store.history.folders.find((folder) => folder.chats.includes(chat.uuid))
+          return chat.messagesLoaded === false || chat.messages.length > 1 || store.history.folders.find((folder) => folder.chats.includes(chat.uuid))
         }),
         quickPrompts: JSON.parse(JSON.stringify(store.history.quickPrompts || [])),
         //padPrompts: JSON.parse(JSON.stringify(store.history.padPrompts || [])),
@@ -328,8 +336,8 @@ const loadHistory = (): void => {
     // reset
     store.history = { version: undefined, folders: [], chats: [], quickPrompts: [], /*padPrompts: []*/ }
 
-    // load and check version
-    const history = window.api.history.load(store.config.workspaceId)
+    // load metadata only (no messages)
+    const history = window.api.history.loadMetadata(store.config.workspaceId)
     if (history.version > kHistoryVersion) {
       store.history.version = history.version
       return
@@ -341,7 +349,7 @@ const loadHistory = (): void => {
     store.history.quickPrompts = history.quickPrompts || []
     //store.history.padPrompts = history.padPrompts || []
     for (const jsonChat of history.chats) {
-      const chat = Chat.fromJson(jsonChat)
+      const chat = Chat.fromMetadata(jsonChat)
       store.history.chats.push(chat)
     }
 

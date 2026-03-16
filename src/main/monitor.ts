@@ -35,15 +35,15 @@ export default class {
     this.fileDigest = this.calculateDigest()
 
     // start
-    this.watcher = fs.watch(filepath, async () => {
-      const digest = this.calculateDigest()
-      if (digest !== this.fileDigest) {
-        this.fileDigest = digest
-        clearTimeout(this.timeout)
-        this.timeout = setTimeout(() => {
+    this.watcher = fs.watch(filepath, () => {
+      clearTimeout(this.timeout)
+      this.timeout = setTimeout(() => {
+        const digest = this.calculateDigest()
+        if (digest !== this.fileDigest) {
+          this.fileDigest = digest
           this.notify(filepath)
-        }, 200)
-      }
+        }
+      }, 200)
     })
   }
 

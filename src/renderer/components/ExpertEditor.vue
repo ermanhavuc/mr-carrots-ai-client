@@ -184,7 +184,7 @@ onMounted(async () => {
       if (app.icon.contents) {
         icons[app.identifier] = app.icon
       } else {
-        icons[app.identifier] = window.api.file.readIcon(app.icon)
+        icons[app.identifier] = await window.api.file.readIcon(app.icon)
       }
     }
 
@@ -196,9 +196,9 @@ const selectApp = (app: ExternalApp) => {
   selectedApp.value = app
 }
 
-const onAddApp = () => {
+const onAddApp = async () => {
   const app = window.api.file.pickFile({ packages: true, location: true })
-  const info = window.api.file.getAppInfo(app as string)
+  const info = await window.api.file.getAppInfo(app as string)
   if (!info) {
     Dialog.alert(t('experts.editor.validation.invalidApp'))
     return

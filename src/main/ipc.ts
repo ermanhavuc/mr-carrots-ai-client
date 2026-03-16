@@ -128,7 +128,7 @@ export const installIpc = (
     event.returnValue = theme;
   });
 
-  ipcMain.on(IPC.APP.GET_HTTP_PORT, async (event) => {
+  ipcMain.on(IPC.APP.GET_HTTP_PORT, (event) => {
     event.returnValue = HttpServer.getInstance().getPort();
   });
 
@@ -166,8 +166,8 @@ export const installIpc = (
     event.returnValue = path.join(assetsFolder, assetPath.replace('./assets/', ''));
   });
 
-  ipcMain.on(IPC.APP.FONTS_LIST, async (event) => {
-    event.returnValue = await fontList.getFonts();
+  ipcMain.handle(IPC.APP.FONTS_LIST, async () => {
+    return fontList.getFonts();
   });
 
   ipcMain.on(IPC.STORE.GET_VALUE, (event, payload) => {
@@ -183,8 +183,8 @@ export const installIpc = (
     event.returnValue = text;
   });
 
-  ipcMain.on(IPC.CLIPBOARD.WRITE_TEXT, async (event, payload) => {
-    event.returnValue = await Automation.writeTextToClipboard(payload);
+  ipcMain.handle(IPC.CLIPBOARD.WRITE_TEXT, async (_, payload) => {
+    return Automation.writeTextToClipboard(payload);
   });
 
   ipcMain.on(IPC.CLIPBOARD.WRITE_IMAGE, (event, payload) => {
@@ -213,8 +213,17 @@ export const installIpc = (
     config.saveSettings(app, JSON.parse(payload) as Configuration);
   });
 
-  ipcMain.on(IPC.HISTORY.LOAD, async (event, workspaceId) => {
-    event.returnValue = JSON.stringify(await history.loadHistory(app, workspaceId));
+  ipcMain.on(IPC.HISTORY.LOAD, (event, workspaceId) => {
+    event.returnValue = JSON.stringify(history.loadHistory(app, workspaceId));
+  });
+
+  ipcMain.on(IPC.HISTORY.LOAD_METADATA, (event, workspaceId) => {
+    event.returnValue = JSON.stringify(history.loadHistoryMetadata(app, workspaceId));
+  });
+
+  ipcMain.on(IPC.HISTORY.LOAD_CHAT_MESSAGES, (event, payload) => {
+    const { workspaceId, chatId } = JSON.parse(payload);
+    event.returnValue = JSON.stringify(history.loadChatMessages(app, workspaceId, chatId));
   });
 
   ipcMain.on(IPC.HISTORY.SAVE, (event, payload) => {
@@ -288,21 +297,21 @@ export const installIpc = (
     event.returnValue = experts.importExperts(app, workspaceId);
   });
 
-  ipcMain.on(IPC.BACKUP.EXPORT, async (event) => {
-    event.returnValue = await backup.exportBackup(app);
+  ipcMain.handle(IPC.BACKUP.EXPORT, async () => {
+    return backup.exportBackup(app);
   });
 
-  ipcMain.on(IPC.BACKUP.IMPORT, async (event) => {
-    event.returnValue = await backup.importBackup(app, quitApp);
+  ipcMain.handle(IPC.BACKUP.IMPORT, async () => {
+    return backup.importBackup(app, quitApp);
   });
 
-  ipcMain.on(IPC.IMPORT.OPENAI, async (event, workspaceId: string) => {
-    event.returnValue = await importOpenAI(app, workspaceId);
+  ipcMain.handle(IPC.IMPORT.OPENAI, async (_, workspaceId: string) => {
+    return importOpenAI(app, workspaceId);
   });
 
-  ipcMain.on(IPC.IMPORT.MARKDOWN, async (event) => {
+  ipcMain.handle(IPC.IMPORT.MARKDOWN, async () => {
     const chat = await importMarkdown(app);
-    event.returnValue = chat || null;
+    return chat || null;
   });
 
   ipcMain.on(IPC.AGENTS.OPEN_FORGE,  () => {
@@ -452,24 +461,24 @@ export const installIpc = (
     event.returnValue = file.getFileContents(app, payload);
   });
 
-  ipcMain.on(IPC.FILE.READ_ICON, async (event, payload) => {
-    event.returnValue = await file.getIconContents(app, payload);
+  ipcMain.handle(IPC.FILE.READ_ICON, async (_, payload) => {
+    return file.getIconContents(app, payload);
   });
 
   ipcMain.on(IPC.FILE.SAVE_FILE, (event, payload) => {
     event.returnValue = file.writeFileContents(app, JSON.parse(payload));
   });
 
-  ipcMain.on(IPC.FILE.DOWNLOAD, async (event, payload) => {
-    event.returnValue = await file.downloadFile(app, JSON.parse(payload));
+  ipcMain.handle(IPC.FILE.DOWNLOAD, async (_, payload) => {
+    return file.downloadFile(app, JSON.parse(payload));
   });
 
   ipcMain.handle(IPC.FILE.GET_TEXT_CONTENT, async (event, contents, format) => {
     return await text.getTextContent(contents, format);
   });
 
-  ipcMain.on(IPC.FILE.GET_APP_INFO, async (event, payload) => {
-    event.returnValue = await file.getAppInfo(app, payload);
+  ipcMain.handle(IPC.FILE.GET_APP_INFO, async (_, payload) => {
+    return file.getAppInfo(app, payload);
   });
 
   ipcMain.on(IPC.FILE.LIST_DIRECTORY, (event, dirPath, includeHidden) => {
@@ -560,14 +569,14 @@ export const installIpc = (
     event.returnValue = getCachedText(payload);
   })
 
-  ipcMain.on(IPC.AUTOMATION.INSERT, async (event, payload) => {
+  ipcMain.handle(IPC.AUTOMATION.INSERT, async (_, payload) => {
     const { text, sourceApp } = payload
-    event.returnValue = await Automation.automate(text, sourceApp, AutomationAction.INSERT_BELOW);
+    return Automation.automate(text, sourceApp, AutomationAction.INSERT_BELOW);
   })
 
-  ipcMain.on(IPC.AUTOMATION.REPLACE, async (event, payload) => {
+  ipcMain.handle(IPC.AUTOMATION.REPLACE, async (_, payload) => {
     const { text, sourceApp } = payload
-    event.returnValue = await Automation.automate(text, sourceApp, AutomationAction.REPLACE);
+    return Automation.automate(text, sourceApp, AutomationAction.REPLACE);
   })
 
   ipcMain.on(IPC.CHAT.OPEN, async (_, chatId) => {
@@ -613,54 +622,50 @@ export const installIpc = (
     event.returnValue = JSON.stringify(docRepo.list(workspaceId));
   });
 
-  ipcMain.on(IPC.DOCREPO.CONNECT, async (event, baseId) => {
+  ipcMain.handle(IPC.DOCREPO.CONNECT, async (_, baseId) => {
     try {
       await docRepo.connect(baseId, true);
-      event.returnValue = true
+      return true
     } catch (error) {
       console.error(error);
-      event.returnValue = false
+      return false
     }
   });
 
-  ipcMain.on(IPC.DOCREPO.DISCONNECT, async (event) => {
+  ipcMain.handle(IPC.DOCREPO.DISCONNECT, async () => {
     try {
       await docRepo.disconnect();
-      event.returnValue = true
+      return true
     } catch (error) {
       console.error(error);
-      event.returnValue = false
+      return false
     }
   });
 
-  ipcMain.on(IPC.DOCREPO.CREATE, async (event, payload) => {
+  ipcMain.handle(IPC.DOCREPO.CREATE, async (_, payload) => {
     try {
       const { workspaceId, title, embeddingEngine, embeddingModel } = payload;
-      event.returnValue = await docRepo.createDocBase(workspaceId, title, embeddingEngine, embeddingModel);
+      return await docRepo.createDocBase(workspaceId, title, embeddingEngine, embeddingModel);
     } catch (error) {
       console.error(error);
-      event.returnValue = null
+      return null
     }
   });
 
-  ipcMain.on(IPC.DOCREPO.UPDATE, async (event, payload) => {
+  ipcMain.handle(IPC.DOCREPO.UPDATE, async (_, payload) => {
     try {
       const { baseId, title, description } = payload;
       await docRepo.updateDocBase(baseId, title, description);
-      event.returnValue = true
     } catch (error) {
       console.error(error);
-      event.returnValue = false
     }
   });
 
-  ipcMain.on(IPC.DOCREPO.DELETE, async (event, baseId) => {
+  ipcMain.handle(IPC.DOCREPO.DELETE, async (_, baseId) => {
     try {
       await docRepo.deleteDocBase(baseId);
-      event.returnValue = true
     } catch (error) {
       console.error(error);
-      event.returnValue = false
     }
   });
 
@@ -709,7 +714,7 @@ export const installIpc = (
     }
   });
 
-  ipcMain.on(IPC.DOCREPO.IS_EMBEDDING_AVAILABLE, async(event, payload) => {
+  ipcMain.on(IPC.DOCREPO.IS_EMBEDDING_AVAILABLE, (event, payload) => {
     try {
       const { engine, model } = payload;
       event.returnValue = Embedder.isModelReady(app, engine, model);
@@ -894,8 +899,8 @@ export const installIpc = (
     event.returnValue = scratchpadManager.importScratchpad(app, workspaceId, filePath, title);
   });
 
-  ipcMain.on(IPC.COMPUTER.IS_AVAILABLE, async (event) => {
-    event.returnValue = await Computer.isAvailable();
+  ipcMain.handle(IPC.COMPUTER.IS_AVAILABLE, async () => {
+    return Computer.isAvailable();
   });
 
   ipcMain.on(IPC.COMPUTER.GET_SCALED_SCREEN_SIZE, (event) => {
@@ -906,12 +911,12 @@ export const installIpc = (
     event.returnValue = Computer.getScreenNumber();
   });
 
-  ipcMain.on(IPC.COMPUTER.GET_SCREENSHOT, async (event) => {
-    event.returnValue = await Computer.takeScreenshot();
+  ipcMain.handle(IPC.COMPUTER.GET_SCREENSHOT, async () => {
+    return Computer.takeScreenshot();
   });
 
-  ipcMain.on(IPC.COMPUTER.EXECUTE_ACTION, async (event, payload) => {
-    event.returnValue = await Computer.executeAction(payload);
+  ipcMain.handle(IPC.COMPUTER.EXECUTE_ACTION, async (_, payload) => {
+    return Computer.executeAction(payload);
   });
 
   ipcMain.on(IPC.COMPUTER.START, async () => {
@@ -944,24 +949,24 @@ export const installIpc = (
     await memoryManager.reset();
   });
 
-  ipcMain.on(IPC.MEMORY.HAS_FACTS, async (event) => {
-    event.returnValue = await memoryManager.isNotEmpty();
+  ipcMain.handle(IPC.MEMORY.HAS_FACTS, async () => {
+    return memoryManager.isNotEmpty();
   });
 
-  ipcMain.on(IPC.MEMORY.FACTS, async (event) => {
-    event.returnValue = await memoryManager.list();
+  ipcMain.handle(IPC.MEMORY.FACTS, async () => {
+    return memoryManager.list();
   });
 
-  ipcMain.on(IPC.MEMORY.STORE, async (event, payload) => {
-    event.returnValue = await memoryManager.store(payload);
+  ipcMain.handle(IPC.MEMORY.STORE, async (_, payload) => {
+    return memoryManager.store(payload);
   });
 
-  ipcMain.on(IPC.MEMORY.RETRIEVE, async (event, payload) => {
-    event.returnValue = await memoryManager.query(payload);
+  ipcMain.handle(IPC.MEMORY.RETRIEVE, async (_, payload) => {
+    return memoryManager.query(payload);
   });
 
-  ipcMain.on(IPC.MEMORY.DELETE, async (event, payload) => {
-    event.returnValue = await memoryManager.delete(payload);
+  ipcMain.handle(IPC.MEMORY.DELETE, async (_, payload) => {
+    return memoryManager.delete(payload);
   });
 
   ipcMain.on(IPC.CODE_EXECUTION.LOAD, (event) => {

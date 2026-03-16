@@ -114,7 +114,7 @@ export default class ImageCreator implements MediaCreator {
         const fileUrl = saveFileContents('png', result.data[0].b64_json)
         return { url: fileUrl }
       } else if (result.data?.[0]?.url) {
-        const fileUrl = download(result.data[0].url)
+        const fileUrl = await download(result.data[0].url)
         return { url: fileUrl }
       } else {
         console.error('[xai] No image returned', result)
@@ -436,7 +436,7 @@ export default class ImageCreator implements MediaCreator {
 
       // download
       const image = response.data.images?.[0] || response.data.image
-      const fileUrl = download(image.url)
+      const fileUrl = await download(image.url)
       return { url: fileUrl }
 
     } catch (error) {
@@ -495,7 +495,7 @@ export default class ImageCreator implements MediaCreator {
       //console.log('[image] saved image to', fileUrl)
       return { url: fileUrl }
     } else if (response.data[0].url) {
-      const fileUrl = download(response.data[0].url)
+      const fileUrl = await download(response.data[0].url)
       //console.log('[image] downloaded image from', fileUrl)
       return { url: fileUrl }
     } else {

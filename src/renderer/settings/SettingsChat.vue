@@ -95,7 +95,7 @@
 <script setup lang="ts">
 
 import { ChatListLayout, ChatToolMode, SendKey, TextFormat } from 'types/config';
-import { ref, computed, provide } from 'vue'
+import { ref, computed, provide, onMounted } from 'vue'
 import { store } from '@services/store'
 import { t } from '@services/i18n'
 import Message from '@models/message'
@@ -112,7 +112,7 @@ const copyFormat = ref<TextFormat>('text')
 const sendKey = ref<SendKey>('enter')
 const showToolCalls = ref<ChatToolMode>('calling')
 const layout = ref<ChatListLayout>('normal')
-const fonts = ref(window.api.app.listFonts())
+const fonts = ref<string[]>([])
 
 const chatTheme = computed(() => store.config.appearance.chat.theme)
 const fontStyle = computed(() => {
@@ -145,6 +145,10 @@ const save = () => {
 }
 
 defineExpose({ load })
+
+onMounted(async () => {
+  fonts.value = await window.api.app.listFonts()
+})
 
 </script>
 

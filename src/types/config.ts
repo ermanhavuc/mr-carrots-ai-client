@@ -70,6 +70,7 @@ export type GeneralConfig = {
   onboardingDone: boolean
   hideOnStartup: boolean
   keepRunning: boolean
+  checkForUpdates: boolean
   proxyMode: ProxyMode
   customProxy: string
   locale: string

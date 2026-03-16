@@ -59,7 +59,7 @@ const reset = () => {
   model.value = 'text-embedding-3-large'
 }
 
-const onSave = () => {
+const onSave = async () => {
   // Validation
   if (!name.value || !engine.value || !model.value) {
     Dialog.alert(t('commands.editor.validation.requiredFields'))
@@ -67,7 +67,7 @@ const onSave = () => {
   }
 
   // Create repository
-  const id = window.api.docrepo.create(store.config.workspaceId, name.value, engine.value, model.value)
+  const id = await window.api.docrepo.create(store.config.workspaceId, name.value, engine.value, model.value)
   emit('save', id)
   close()
 }

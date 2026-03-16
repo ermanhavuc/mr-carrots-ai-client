@@ -189,7 +189,7 @@ export class LlmContext {
 
         // @ts-expect-error partial mock
         computer: {
-          isAvailable: () => false,
+          isAvailable: async () => false,
         }
       }
     }

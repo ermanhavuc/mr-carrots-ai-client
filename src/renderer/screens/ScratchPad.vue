@@ -642,8 +642,8 @@ const onSave = async (opts?: { autoSave?: boolean }) => {
   }
 }
 
-const onCopy = () => {
-  window.api.clipboard.writeText(content.value)
+const onCopy = async () => {
+  await window.api.clipboard.writeText(content.value)
   copyState.value = 'copied'
   setTimeout(() => copyState.value = 'idle', 1000)
 }

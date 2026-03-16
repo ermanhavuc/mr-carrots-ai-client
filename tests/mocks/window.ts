@@ -55,7 +55,7 @@ const useWindowMock = (opts?: WindowMockOpts) => {
       showAbout: vi.fn(),
       // showDialog: vi.fn(async () => { return { response: opts.dialogResponse || 0, checkboxChecked: false }}),
       getAssetPath: vi.fn(() => ''),
-      listFonts: vi.fn(() => []),
+      listFonts: vi.fn(async () => []),
       fullscreen: vi.fn(),
       getHttpPort: vi.fn(() => 8090),
     },
@@ -159,8 +159,8 @@ const useWindowMock = (opts?: WindowMockOpts) => {
     },
     automation: {
       getText: vi.fn(() => 'text'),
-      insert: vi.fn(() => true),
-      replace: vi.fn(() => true),
+      insert: vi.fn(async () => true),
+      replace: vi.fn(async () => true),
     },
     permissions: {
       checkAccessibility: vi.fn(() => Promise.resolve(true)),
@@ -364,6 +364,16 @@ const useWindowMock = (opts?: WindowMockOpts) => {
     },
     history: {
       load: vi.fn(() => ({ version: kHistoryVersion, folders: [ ], chats: [ ], quickPrompts: [ ] })),
+      loadMetadata: vi.fn((workspaceId: string) => {
+        const full = window.api.history.load(workspaceId)
+        if (!full) return full
+        return { ...full, chats: full.chats.map((c: any) => ({ ...c, messages: [] })) }
+      }),
+      loadChatMessages: vi.fn((workspaceId: string, chatId: string) => {
+        const full = window.api.history.load(workspaceId)
+        const chat = full?.chats?.find((c: any) => c.uuid === chatId)
+        return chat?.messages || []
+      }),
       save: vi.fn(),
     },
     base64:{
@@ -372,7 +382,7 @@ const useWindowMock = (opts?: WindowMockOpts) => {
     },
     clipboard: {
       readText: vi.fn(() => clipboard),
-      writeText: vi.fn((text) => clipboard = text),
+      writeText: vi.fn(async (text) => { clipboard = text; return true }),
       writeImage: vi.fn(() => true),
     },
     file: {
@@ -398,11 +408,11 @@ const useWindowMock = (opts?: WindowMockOpts) => {
         createdAt: Date.now(),
       })),
       read: vi.fn((filepath: string) => { return { url: filepath, contents: `${filepath}_encoded`, mimeType: 'whatever' } }),
-      readIcon: vi.fn(),
+      readIcon: vi.fn(async () => null),
       extractText: vi.fn(async (s) => Promise.resolve(`${s}_extracted`)),
-      getAppInfo: vi.fn(),
+      getAppInfo: vi.fn(async () => null),
       save: vi.fn(() => 'file://file_saved'),
-      download: vi.fn(),
+      download: vi.fn(async () => 'file://downloaded'),
       write: vi.fn(() => true),
       delete: vi.fn(() => true),
       find: vi.fn(() => 'file.ext'),
@@ -452,11 +462,11 @@ const useWindowMock = (opts?: WindowMockOpts) => {
         ]
       }),
       isEmbeddingAvailable: vi.fn(() => true),
-      connect: vi.fn(() => true),
-      disconnect: vi.fn(() => true),
-      create: vi.fn(),
-      update: vi.fn(),
-      delete: vi.fn(),
+      connect: vi.fn(async () => true),
+      disconnect: vi.fn(async () => true),
+      create: vi.fn(async () => 'new-uuid'),
+      update: vi.fn(async () => undefined),
+      delete: vi.fn(async () => undefined),
       addDocument: vi.fn(async () => 'uuid'),
       removeDocument: vi.fn(async () => true),
       query: vi.fn(async () => [
@@ -564,11 +574,11 @@ const useWindowMock = (opts?: WindowMockOpts) => {
       render: vi.fn(renderMarkdown),
     },
     computer: {
-      isAvailable: vi.fn(() => true),
+      isAvailable: vi.fn(async () => true),
       getScaledScreenSize: vi.fn(() => ({ width: 1920, height: 1080 })),
       getScreenNumber: vi.fn(() => 1),
-      takeScreenshot: vi.fn(() => 'screenshot_url'),
-      executeAction: vi.fn(),
+      takeScreenshot: vi.fn(async () => 'screenshot_url'),
+      executeAction: vi.fn(async () => ({})),
       start: vi.fn(),
       stop: vi.fn(),
       close: vi.fn(),
@@ -590,11 +600,11 @@ const useWindowMock = (opts?: WindowMockOpts) => {
     },
     memory: {
       reset: vi.fn(),
-      isNotEmpty: vi.fn(() => false),
-      store: vi.fn(() => true),
-      facts: vi.fn(() => [ { uuid: 'uuid1', content: 'fact1' }, { uuid: 'uuid2', content: 'fact2' } ]),
-      retrieve: vi.fn((query: string) => query === 'fact' ? [ 'fact1' ] : []),
-      delete: vi.fn(),
+      isNotEmpty: vi.fn(async () => false),
+      store: vi.fn(async () => true),
+      facts: vi.fn(async () => [ { uuid: 'uuid1', content: 'fact1' }, { uuid: 'uuid2', content: 'fact2' } ]),
+      retrieve: vi.fn(async (query: string) => query === 'fact' ? [ 'fact1' ] : []),
+      delete: vi.fn(async () => {}),
     },
     codeExecution: {
       load: vi.fn(() => ({ schemas: {} })),
@@ -619,8 +629,12 @@ const useWindowMock = (opts?: WindowMockOpts) => {
       update: vi.fn(() => ({ success: true, skillId: 'skill_existing', rootPath: '/home/user/.witsy/skills/existing' })),
     },
     backup: {
-      export: vi.fn(() => true),
-      import: vi.fn(() => true),
+      export: vi.fn(async () => true),
+      import: vi.fn(async () => true),
+    },
+    import: {
+      markdown: vi.fn(async () => null),
+      openai: vi.fn(async () => true),
     },
     workspace: {
       list: vi.fn(() => []),

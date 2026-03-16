@@ -48,9 +48,9 @@ const emit = defineEmits(['close'])
 
 const onDelete = (event: MouseEvent, fact: MemoryFact) => {
 
-  const deleteFact = (fact: MemoryFact) => {
-    window.api.memory.delete(fact.uuid)
-    contents.value = window.api.memory.facts()
+  const deleteFact = async (fact: MemoryFact) => {
+    await window.api.memory.delete(fact.uuid)
+    contents.value = await window.api.memory.facts()
   }
 
   if (event.shiftKey) {
@@ -77,8 +77,8 @@ const onClose = () => {
 }
 
 defineExpose({
-  show: () => {
-    contents.value = window.api.memory.facts()
+  show: async () => {
+    contents.value = await window.api.memory.facts()
     dialog.value.show()
   },
 })

@@ -142,6 +142,8 @@ const initializeChat = () => {
     })
     chat.value.addMessage(new Message('system', 'Dummy chat to save created media'))
     store.history.chats.push(chat.value)
+  } else {
+    store.loadChatMessages(chat.value)
   }
 }
 

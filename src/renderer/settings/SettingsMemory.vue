@@ -40,8 +40,8 @@ const ready = computed(() => {
   return store.config.plugins.memory.engine && store.config.plugins.memory.model
 })
 
-const load = () => {
-  hasFacts.value = window.api.memory.isNotEmpty()
+const load = async () => {
+  hasFacts.value = await window.api.memory.isNotEmpty()
   engine.value = store.config.plugins.memory.engine || 'openai'
   model.value = store.config.plugins.memory.model || ''
   enabled.value = store.config.plugins.memory.enabled || false

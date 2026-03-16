@@ -113,7 +113,7 @@ export default class VideoCreator implements MediaCreator {
 
       // download
       const video = response.data.video
-      const fileUrl = download(video.url)
+      const fileUrl = await download(video.url)
       return { url: fileUrl }
 
     } catch (error) {
@@ -373,7 +373,7 @@ export default class VideoCreator implements MediaCreator {
 
         // completed: video object is present with url
         if (statusResult.video?.url) {
-          const fileUrl = download(statusResult.video.url)
+          const fileUrl = await download(statusResult.video.url)
           return { url: fileUrl }
         }
 

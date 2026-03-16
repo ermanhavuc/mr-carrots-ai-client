@@ -73,7 +73,7 @@ const usageId = computed(() => {
   else if (action.value === 'replace') return `commands.picker.usage.replace`
 })
 
-onMounted(() => {
+onMounted(async () => {
 
   // shortcuts work better at document level
   onDomEvent(document, 'keydown', onKeyDown)
@@ -89,7 +89,7 @@ onMounted(() => {
 
   // query params
   if (props.extra) {
-    onShow(props.extra)
+    await onShow(props.extra)
   }
 
 })
@@ -100,13 +100,13 @@ const onFileModified = (file: string) => {
   }
 }
 
-const onShow = (params?: anyDict) => {
+const onShow = async (params?: anyDict) => {
   //console.log('CommandPicker.onShow', JSON.stringify(params))
   showParams = params
-  sourceApp.value = showParams?.sourceApp ? window.api.file.getAppInfo(showParams.sourceApp.path) : null
   commands.value = store.commands.filter(command => command.state == 'enabled')
   selected.value = commands.value[0]
   action.value = 'default'
+  sourceApp.value = showParams?.sourceApp ? await window.api.file.getAppInfo(showParams.sourceApp.path) : null
 }
 
 const actionFromEvent = (event: MouseEvent | KeyboardEvent): CommandAction => {

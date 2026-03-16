@@ -144,8 +144,8 @@ onMounted(() => {
   })
 })
 
-const onImportMarkdown = () => {
-  const chatData = window.api.import.markdown()
+const onImportMarkdown = async () => {
+  const chatData = await window.api.import.markdown()
   if (chatData) {
     emit('import-markdown', chatData)
   }
@@ -171,11 +171,11 @@ const onAppMenu = (event: Event) => {
             [{ label: t('tray.menu.installUpdate'), onClick: () => window.api.update.apply() }] :
             [{ label: t('menu.app.checkForUpdates'), onClick: () => window.api.update.check() }]
           ),
-          { label: t('menu.file.backupExport'), divided: 'up', onClick: () => setTimeout(() => window.api.backup.export(), 0) },
-          { label: t('menu.file.backupImport'), onClick: () => setTimeout(() => window.api.backup.import(), 0) },
+          { label: t('menu.file.backupExport'), divided: 'up', onClick: () => setTimeout(async () => window.api.backup.export(), 0) },
+          { label: t('menu.file.backupImport'), onClick: () => setTimeout(async () => window.api.backup.import(), 0) },
           { label: t('menu.file.import.title'), divided: 'up', children: [
             { label: t('menu.file.import.markdown'), onClick: () => setTimeout(() => onImportMarkdown(), 0) },
-            { label: t('menu.file.import.openai'), onClick: () => setTimeout(() => window.api.import.openai(store.config.workspaceId), 0) }
+            { label: t('menu.file.import.openai'), onClick: () => setTimeout(async () => window.api.import.openai(store.config.workspaceId), 0) }
           ] },
           { label: t('menu.file.closeWindow'), divided: 'up', onClick: () => window.api.main.close() },
         ]

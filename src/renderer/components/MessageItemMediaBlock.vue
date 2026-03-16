@@ -60,8 +60,8 @@ const onCopy = () => {
   }, 1000)
 }
 
-const onDownload = () => {
-  window.api.file.download({
+const onDownload = async () => {
+  await window.api.file.download({
     url: props.url,
     properties: {
       prompt: true,

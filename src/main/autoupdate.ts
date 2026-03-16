@@ -12,6 +12,7 @@ export default class AutoUpdater {
   constructor(app: App, public hooks: {
     onUpdateAvailable: () => void
     preInstall: () => void
+    getCheckForUpdates?: () => boolean
   }) {
     this.app = app
     this.initialize();
@@ -84,8 +85,14 @@ export default class AutoUpdater {
     })
 
     // check now and schedule
-    autoUpdater.checkForUpdates()
+    if (this.hooks.getCheckForUpdates?.() ?? true) {
+      autoUpdater.checkForUpdates()
+    }
     setInterval(() => {
+      if (!(this.hooks.getCheckForUpdates?.() ?? true)) {
+        console.log('[update] Auto-update check disabled, skipping')
+        return
+      }
       console.log('[update] Scheduled update-check')
       this.manualUpdate = false;
       autoUpdater.checkForUpdates()

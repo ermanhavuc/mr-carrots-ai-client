@@ -42,14 +42,14 @@ export default class extends Plugin {
 
     // if not screenshot run it first
     if (parameters.action !== 'screenshot') {
-      const result = window.api.computer.executeAction(parameters as ComputerAction)
+      const result = await window.api.computer.executeAction(parameters as ComputerAction)
       if (result === false) {
         return { content: 'An error occured while executing this action' }
       }
     }
 
     // screenshot 
-    const sshot = window.api.computer.takeScreenshot()
+    const sshot = await window.api.computer.takeScreenshot()
     return { content: [
       { type: 'image',
         source: {

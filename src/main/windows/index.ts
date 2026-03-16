@@ -10,7 +10,7 @@ import { mainWindow } from './main';
 import { wait } from '../utils';
 import MacosAutomator from '@main/automations/macos';
 import WindowsAutomator from '@main/automations/windows';
-import interceptNetwork from '../network';
+import { registerWindow } from '../network';
 import * as config from '../config';
 import Store from 'electron-store';
 import process from 'node:process';
@@ -196,8 +196,8 @@ export const createWindow = (opts: CreateWindowOpts = {}) => {
     return { action: 'deny' };
   });
 
-  // to log network traffic
-  interceptNetwork(window);
+  // register for network interception (attaches when debug window opens)
+  registerWindow(window);
   
   // and load the index.html of the app.
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {

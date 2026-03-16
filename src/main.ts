@@ -236,6 +236,7 @@ app.whenReady().then(async () => {
       window.emitIpcEventToAll('update-available');
       trayIconManager.install();
     },
+    getCheckForUpdates: () => config.loadSettings(app).general.checkForUpdates ?? true,
   });
 
   // tray icon

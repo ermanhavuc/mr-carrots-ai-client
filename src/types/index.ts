@@ -117,6 +117,7 @@ export interface Chat {
   docrepos?: string[]
   modelOpts?: LlmModelOpts
   messages: Message[]
+  messagesLoaded: boolean
   temporary: boolean
   patchFromJson(jsonChat: any): boolean
   disableTools(): void
@@ -229,6 +230,7 @@ export interface Store {
   isFeatureEnabled(feature: string): boolean
 
   saveHistory(): void
+  loadChatMessages(chat: Chat): void
   saveSettings(): void
   load(): void
   loadWorkspace(): void
@@ -362,7 +364,7 @@ declare global {
         showAbout(): void
         getAssetPath(assetPath: string): string
         // showDialog(opts: any): Promise<Electron.MessageBoxReturnValue>
-        listFonts(): string[]
+        listFonts(): Promise<string[]>
         fullscreen(window: string, state: boolean): void
         getHttpPort(): number
       }
@@ -398,11 +400,11 @@ declare global {
         normalize(filePath: string): string
         exists(filePath: string): boolean
         read(filepath: string): FileContents
-        readIcon(filepath: string): FileContents
+        readIcon(filepath: string): Promise<FileContents>
         extractText(contents: string, format: string): Promise<string>
-        getAppInfo(filepath: string): ExternalApp
+        getAppInfo(filepath: string): Promise<ExternalApp>
         save(opts: FileSaveParams): string
-        download(opts: FileDownloadParams): string
+        download(opts: FileDownloadParams): Promise<string>
         write(filePath: string, content: string): boolean
         delete(filepath: string): boolean
         find(name: string): string
@@ -435,12 +437,14 @@ declare global {
       }
       history: {
         load(workspaceId: string): History
+        loadMetadata(workspaceId: string): History
+        loadChatMessages(workspaceId: string, chatId: string): any[]
         save(workspaceId: string, history: History): void
       }
       automation: {
         getText(id: string): string
-        insert(text: string, sourceApp: Application): boolean
-        replace(text: string, sourceApp: Application): boolean
+        insert(text: string, sourceApp: Application): Promise<boolean>
+        replace(text: string, sourceApp: Application): Promise<boolean>
       }
       permissions: {
         checkAccessibility(): Promise<boolean>
@@ -495,12 +499,12 @@ declare global {
       docrepo: {
         open(create?: boolean): void
         list(workspaceId: string): DocumentBase[]
-        connect(baseId: string): void
-        disconnect(): void
+        connect(baseId: string): Promise<boolean>
+        disconnect(): Promise<boolean>
         isEmbeddingAvailable(engine: string, model: string): boolean
-        create(workspaceId: string, title: string, embeddingEngine: string, embeddingModel: string): string
-        update(baseId: string, title: string, description?: string): void
-        delete(baseId: string): void
+        create(workspaceId: string, title: string, embeddingEngine: string, embeddingModel: string): Promise<string>
+        update(baseId: string, title: string, description?: string): Promise<void>
+        delete(baseId: string): Promise<void>
         isSourceSupported(type: SourceType, origin: string): boolean
         addDocument(id: string, type: SourceType, origin: string, opts?: AddDocumentOptions): Promise<string>
         cancelTask(taskId: string): Promise<void>
@@ -525,7 +529,7 @@ declare global {
       },
       clipboard: {
         readText(): string
-        writeText(text: string): boolean
+        writeText(text: string): Promise<boolean>
         writeImage(path: string): boolean
       },
       markdown: {
@@ -569,11 +573,11 @@ declare global {
         import(workspaceId: string, filePath: string, title: string): string | null
       }
       computer: {
-        isAvailable(): boolean
+        isAvailable(): Promise<boolean>
         getScaledScreenSize(): Size
         getScreenNumber(): number
-        takeScreenshot(): string
-        executeAction(action: ComputerAction): any
+        takeScreenshot(): Promise<string>
+        executeAction(action: ComputerAction): Promise<any>
         start(): void
         stop(): void
         close(): void
@@ -581,11 +585,11 @@ declare global {
       }
       memory: {
         reset(): void
-        isNotEmpty(): boolean
-        facts(): MemoryFact[]
-        store(contents: string[]): boolean
-        retrieve(query: string): string[]
-        delete(uuid: string): void
+        isNotEmpty(): Promise<boolean>
+        facts(): Promise<MemoryFact[]>
+        store(contents: string[]): Promise<boolean>
+        retrieve(query: string): Promise<string[]>
+        delete(uuid: string): Promise<void>
       }
       codeExecution: {
         load(): { schemas: Record<string, any> }
@@ -613,12 +617,12 @@ declare global {
         start(): void
       }
       backup: {
-        export(): boolean
-        import(): boolean
+        export(): Promise<boolean>
+        import(): Promise<boolean>
       }
       import: {
-        markdown(): any
-        openai(workspaceId: string): boolean
+        markdown(): Promise<any>
+        openai(workspaceId: string): Promise<boolean>
       }
       ollama: {
         downloadStart(targetDirectory: string): Promise<{ success: boolean; downloadId?: string; error?: string }>

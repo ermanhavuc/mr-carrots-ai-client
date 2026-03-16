@@ -68,7 +68,7 @@ for (let i=1; i<tabs.length; i++) {
 test('Settings General', async () => {
   
   const tab = await switchToTab(wrapper, tabs.indexOf('settingsGeneral'))
-  expect(tab.findAll('.form-field')).toHaveLength(7)
+  expect(tab.findAll('.form-field')).toHaveLength(8)
   expect(tab.findAll('.form-field.localeUI select option')).toHaveLength(3)
   
   // helper
