@@ -818,6 +818,47 @@ describe('ContextMenuPlus System', () => {
       expect(true).toBe(true)
     })
 
+    it('pressing Enter with filter text clicks the first visible item', async () => {
+      const clickHandler = vi.fn()
+      
+      wrapper = mount(ContextMenuPlus, {
+        props: {
+          anchor: '#test-anchor',
+          showFilter: true
+        },
+        slots: {
+          default: `
+            <div class="item">Copy File</div>
+            <div class="item">Paste File</div>
+            <div class="item">Delete Item</div>
+          `
+        },
+        attachTo: document.body
+      })
+
+      await nextTick()
+
+      // Attach click handler to first item
+      const firstItem = findInBody('.item')
+      firstItem.element?.addEventListener('click', clickHandler)
+
+      // Type in filter using the same pattern as other filter tests
+      const filterInput = findInBody('.filter-input input')
+      if (filterInput.element) {
+        (filterInput.element as HTMLInputElement).value = 'copy'
+        filterInput.element.dispatchEvent(new Event('input'))
+        await nextTick()
+      }
+
+      // Press Enter in the filter input
+      if (filterInput.element) {
+        filterInput.element.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }))
+        await nextTick()
+      }
+
+      expect(clickHandler).toHaveBeenCalledTimes(1)
+    })
+
     it('clears filter when navigating back from submenu', async () => {
       wrapper = mount(ContextMenuPlus, {
         props: {

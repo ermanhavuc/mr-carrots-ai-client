@@ -625,9 +625,9 @@ const onKeyDown = (event: KeyboardEvent) => {
       currentItem.click()
     } else if (filter.value && list.value) {
       // When filtering with text, select and click the first visible item
-      const firstVisible = list.value.querySelector<HTMLElement>(
+      const firstVisible = list.value.querySelector(
         '.item:not(.separator):not(.disabled):not([style*="display: none"])'
-      )
+      ) as HTMLElement | null
       if (firstVisible) {
         firstVisible.click()
       }
