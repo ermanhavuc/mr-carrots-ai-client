@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
-# Witsy CLI wrapper script
-# This script allows running the Witsy CLI from the command line
+# Mr. Carrot's AI Client CLI wrapper script
+# This script allows running the CLI from the command line
 # by using the Electron binary as a Node.js runtime
 
 # Detect platform and set paths accordingly
@@ -26,7 +26,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 		exit 1
 	fi
 
-	ELECTRON="$APP_PATH/Contents/MacOS/Witsy"
+	ELECTRON="$APP_PATH/Contents/MacOS/Mr Carrots AI Client"
 	CLI="$APP_PATH/Contents/Resources/cli/cli.js"
 
 else
@@ -42,7 +42,7 @@ else
 	SCRIPT_DIR="$( cd -P "$( dirname "$SCRIPT_PATH" )" && pwd )"
 
 	# Script is in resources/cli/bin, executable is 3 levels up
-	ELECTRON="$SCRIPT_DIR/../../../witsy"
+	ELECTRON="$SCRIPT_DIR/../../../mrcarrot-ai"
 	CLI="$SCRIPT_DIR/../cli.js"
 
 fi

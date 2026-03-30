@@ -1,10 +1,10 @@
-# Contributing to Witsy
+# Contributing to Mr. Carrot's AI Client
 
-Thank you for considering contributing to Witsy! Here are some guidelines to help you get started.
+Thank you for considering contributing to Mr. Carrot's AI Client. Here are the project guidelines.
 
-## Contribution License Agreement
+## Contribution Terms
 
-For contributions to be accepted into Witsy, you first need sign the [Contributor License Agreement](CLA.md).
+This fork does not require a separate Contributor License Agreement. By submitting a contribution, you agree that it can be distributed under the project's AGPL-3.0-or-later license.
 
 ## Code Contributions
 
@@ -35,12 +35,12 @@ Beware that when API Keys Safe Storage is activated, your DEBUG build and RELEAS
 
 1. **Generate Translation File**: Use the script `./tools/i18n_auto.ts` with the two-letter language code (e.g., "es") and the name of the language in English (e.g., "Spanish").
 2. **Review Translation**: Copy the generated file to a `locales` subfolder of the  data folder. You need to create this folder in:
-  - **Windows**: `%APPDATA%/Witsy`
-  - **macOS**: `~/Library/Application\ Support/Witsy`
-  - **Linux**: `~/.config/Witsy`
+  - **Windows**: `%APPDATA%/Mr Carrots AI Client`
+  - **macOS**: `~/Library/Application\ Support/Mr Carrots AI Client`
+  - **Linux**: `~/.config/Mr Carrots AI Client`
 3. **Reload the App**: Reload the application to review the translation.
 4. **Select your language**: You should see your language in Settings | General. If you do not see the proper flag and name for your language you can add it to `src/components/LangSelect.vue`
 5. **Final Review**: Before committing you can run `./tools/i18n_check.ts` whcih should return no errors and finally `./tools/i18n_sort.ts` to clean your file!
 6. **Create a Pull Request**: Once you are satisfied with the translation, create a pull request for review.
 
-Thank you for your contributions!
+Thank you for your contributions.

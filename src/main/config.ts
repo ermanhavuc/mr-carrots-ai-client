@@ -27,7 +27,7 @@ const safeStore = new Store<Record<string, string>>({
   name: process.env.DEBUG ? 'apiKeys-debug' : 'apiKeys',
   accessPropertiesByDotNotation: false,
   watch: false,
-  encryptionKey: 'witsy',
+  encryptionKey: 'mr-carrots-ai-client',
 });
 
 const monitor: Monitor = new Monitor(() => {

@@ -1,42 +1,30 @@
 
 <div align="center">
 
-  <img src="assets/icon.png" width="128" alt="Witsy Logo">
-  <div><b>Witsy</b></div>
+  <img src="assets/icon.png" width="128" alt="Mr. Carrot's AI Client Logo">
+  <div><b>Mr. Carrot's AI Client</b></div>
   <div>Desktop AI Assistant<br/>Universal MCP Client</div>
-
-</div>
-
-<p></p>
-<div align="center">
-
-[![Version Badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/nbonamy/8febadb1ecb32078db4c003d0c09f565/raw/version.json)](https://github.com/nbonamy/witsy/releases)
-[![Downloads Badge](https://img.shields.io/github/downloads/nbonamy/witsy/total.svg?color=orange)](https://tooomm.github.io/github-release-stats/?username=nbonamy&repository=witsy)
-[![Test Badge](https://github.com/nbonamy/witsy/actions/workflows/test.yml/badge.svg)](https://github.com/nbonamy/witsy/blob/main/.github/workflows/test.yml)
-[![Coverage Badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/nbonamy/8febadb1ecb32078db4c003d0c09f565/raw/witsy__main.json)](https://gist.github.com/nbonamy/fee06adf8df838e499209254e61da7f6)
-
-</div>
-
-<div align="center">
-
-[![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/nbonamy)
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/nbonamy/witsy)
 
 </div>
 
 ## Downloads
 
-Download Witsy from the [releases](https://github.com/nbonamy/witsy/releases) page.
+Source code lives at [ermanhavuc/mr-carrots-ai-client](https://github.com/ermanhavuc/mr-carrots-ai-client).
 
-On macOS you can also `brew install --cask witsy`.
+Release binaries can be published from the GitHub releases page once the repository is live. Until then, build locally:
+
+```
+npm ci
+npm start
+```
 
 
-## What is Witsy?
+## What is Mr. Carrot's AI Client?
 
-Witsy is a BYOK (Bring Your Own Keys) AI application: it means you need to have API keys for the LLM providers you want to use. Alternatively,
-you can use [Ollama](https://ollama.com) to run models locally on your machine for free and use them in Witsy.
+Mr. Carrot's AI Client is a BYOK (Bring Your Own Keys) AI application: it means you need to have API keys for the LLM providers you want to use. Alternatively,
+you can use [Ollama](https://ollama.com) to run models locally on your machine for free and use them in Mr. Carrot's AI Client.
 
-It is the first of very few (only?) universal MCP clients:<br/>***Witsy allows you to run MCP servers with virtually any LLM!***
+This fork starts from Witsy and keeps the same general goal: a universal MCP client that can run MCP servers with virtually any LLM.
 
 ## Supported AI Providers
 
@@ -81,7 +69,7 @@ Non-exhaustive feature list:
 
 ## Setup
 
-You can download a binary from from the [releases](https://github.com/nbonamy/witsy/releases) page or build yourself:
+You can build the app locally with:
 
 ```
 npm ci
@@ -124,7 +112,7 @@ Generate content in any application:
 - From any editable content in any application
 - Hit the Prompt anywhere shortcut (Shift+Control+Space / ^⇧Space)
 - Enter your prompt in the window that pops up
-- Watch Witsy enter the text directly in your application!
+- Watch Mr. Carrot's AI Client enter the text directly in your application.
 
 On Mac, you can define an expert that will automatically be triggered depending on the foreground application. For instance, if you have an expert used to generate linux commands, you can have it selected if you trigger Prompt Anywhere from the Terminal application!
 
@@ -155,7 +143,7 @@ https://www.youtube.com/watch?v=czcSbG2H-wg
 
 ## Chat with your documents (RAG)
 
-You can connect each chat with a document repository: Witsy will first search for relevant documents in your local files and provide this info to the LLM. To do so:
+You can connect each chat with a document repository: Mr. Carrot's AI Client will first search for relevant documents in your local files and provide this info to the LLM. To do so:
 
 - Click on the database icon on the left of the prompt
 - Click Manage and then create a document repository
@@ -167,7 +155,7 @@ You can connect each chat with a document repository: Witsy will first search fo
 
 You can transcribe audio recorded on the microphone to text. Transcription can be done using a variety of state of the art speech to text models (which require API key) or using local Whisper model (requires download of large files).
 
-Currently Witsy supports the following speech to text models:
+Currently Mr. Carrot's AI Client supports the following speech to text models:
 - GPT4o-Transcribe
 - Gladia
 - Speechmatics (Standards + Enhanced)
@@ -177,7 +165,7 @@ Currently Witsy supports the following speech to text models:
 - fal.ai ElevenLabs
 - nVidia Microsoft Phi-4 Multimodal 
 
-Witsy supports quick shortcuts, so your transcript is always only one button press away. 
+Mr. Carrot's AI Client supports quick shortcuts, so your transcript is always only one button press away.
 
 Once the text is transcribed you can:
 
@@ -192,7 +180,7 @@ https://www.youtube.com/watch?v=vixl7I07hBk
 
 ## HTTP API
 
-Witsy provides a local HTTP API that allows external applications to trigger various commands and features. The API server runs on `localhost` by default on port **8090** (or the next available port if 8090 is in use).
+Mr. Carrot's AI Client provides a local HTTP API that allows external applications to trigger various commands and features. The API server runs on `localhost` by default on port **8090** (or the next available port if 8090 is in use).
 
 **Security Note:**
 The HTTP server runs on localhost only by default. If you need external access, consider using a reverse proxy with proper authentication.
@@ -290,24 +278,24 @@ curl -X POST http://localhost:8090/api/complete \
 
 ### Command Line Interface
 
-Witsy includes a command-line interface that allows you to interact with the AI assistant directly from your terminal.
+Mr. Carrot's AI Client includes a command-line interface that allows you to interact with the AI assistant directly from your terminal.
 
 **Installation**
 
-The CLI is automatically installed when you launch Witsy for the first time:
-- **macOS**: Creates a symlink at `/usr/local/bin/witsy` (requires admin password)
+The CLI is automatically installed when you launch Mr. Carrot's AI Client for the first time:
+- **macOS**: Creates a symlink at `/usr/local/bin/mrcarrot-ai` (requires admin password)
 - **Windows**: Adds the CLI to your user PATH (restart terminal for changes to take effect)
-- **Linux**: Creates a symlink at `/usr/local/bin/witsy` (uses pkexec if needed)
+- **Linux**: Creates a symlink at `/usr/local/bin/mrcarrot-ai` (uses pkexec if needed)
 
 **Usage**
 
-Once installed, you can use the `witsy` command from any terminal:
+Once installed, you can use the `mrcarrot-ai` command from any terminal:
 
 ```bash
-witsy
+mrcarrot-ai
 ```
 
-The CLI will connect to your running Witsy application and provide an interactive chat interface. It uses the same configuration (engine, model, API keys) as your desktop application.
+The CLI will connect to your running Mr. Carrot's AI Client application and provide an interactive chat interface. It uses the same configuration (engine, model, API keys) as your desktop application.
 
 **Available Commands**
 - `/help` - Show available commands
@@ -318,12 +306,12 @@ The CLI will connect to your running Witsy application and provide an interactiv
 - `/exit` - Exit the CLI
 
 **Requirements**
-- Witsy desktop application must be running
+- Mr. Carrot's AI Client desktop application must be running
 - HTTP API server enabled (default port: 4321)
 
 ### CLI Chat Completion API
 
-The `/api/complete` endpoint provides programmatic access to Witsy's chat completion functionality, enabling command-line tools and scripts to interact with any configured LLM.
+The `/api/complete` endpoint provides programmatic access to Mr. Carrot's AI Client chat completion functionality, enabling command-line tools and scripts to interact with any configured LLM.
 
 **Endpoint**: `POST /api/complete`
 
@@ -394,10 +382,10 @@ Response:
 
 ### Command Line Interface (CLI)
 
-Witsy includes a command-line interface for interacting with AI models directly from your terminal.
+Mr. Carrot's AI Client includes a command-line interface for interacting with AI models directly from your terminal.
 
 **Requirements:**
-- Witsy application must be running (for the HTTP API server)
+- Mr. Carrot's AI Client application must be running (for the HTTP API server)
 
 **Launch the CLI:**
 ```bash
@@ -517,7 +505,7 @@ curl "http://localhost:8090/api/agent/status/abc12345/550e8400-e29b-41d4-a716-44
 - [x] OpenAI Sora support
 - [x] Google Nano Banana support
 - [x] Command line interface
-- [x] HTTP Server for commanding Witsy, triggering Agents
+- [x] HTTP Server for commanding Mr. Carrot's AI Client, triggering Agents
 - [x] Table rendering as artifact, download as CSV and XSLX
 - [x] Web apps in menu bar
 - [x] Perplexity Search API support

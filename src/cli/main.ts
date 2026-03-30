@@ -26,13 +26,13 @@ function parseCliArgs(): CliArgs {
     // Show help
     if (values.help) {
       console.log(`
-${chalk.bold('Witsy CLI')} - AI Assistant Command Line Interface
+    ${chalk.bold("Mr. Carrot's AI Client CLI")} - AI Assistant Command Line Interface
 
 ${chalk.bold('Usage:')}
-  witsy [options]
+      mrcarrot-ai [options]
 
 ${chalk.bold('Options:')}
-  -p, --port <port>    Connect to Witsy on specified port (default: 8090)
+  -p, --port <port>    Connect to Mr. Carrot's AI Client on specified port (default: 8090)
   -d, --debug          Enable debug mode (show keycodes)
   -h, --help           Show this help message
 

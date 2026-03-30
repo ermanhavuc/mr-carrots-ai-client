@@ -64,8 +64,8 @@ const config: ForgeConfig = {
     // },
 
     icon: 'assets/icon',
-    executableName: process.platform == 'linux' ? 'witsy' : 'Witsy',
-    appBundleId: 'com.nabocorp.witsy',
+    executableName: process.platform == 'linux' ? 'mrcarrot-ai' : 'Mr Carrots AI Client',
+    appBundleId: 'com.ermanhavuc.mrcarrotsaiclient',
     extendInfo: './build/Info.plist',
     buildVersion: `${process.env.BUILD_NUMBER}`,
     extraResource: [

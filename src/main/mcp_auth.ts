@@ -141,7 +141,7 @@ export default class McpOAuthManager {
             </style>
           </head>
           <body>
-            <img src="/logo.png" alt="Witsy" class="logo">
+            <img src="/logo.png" alt="Mr. Carrot's AI Client" class="logo">
             <h1>${t('mcp.oauth.success.title')}</h1>
             <p>${t('mcp.oauth.success.message')}</p>
             <script>setTimeout(() => window.close(), 5000);</script>
@@ -172,7 +172,7 @@ export default class McpOAuthManager {
             </style>
           </head>
           <body>
-            <img src="https://witsy.bonamy.fr/img/logo.png" alt="Witsy" class="logo">
+            <img src="/logo.png" alt="Mr. Carrot's AI Client" class="logo">
             <h1>Authorization Failed</h1>
             <p>Error: ${error}</p>
           </body>
@@ -240,7 +240,7 @@ export default class McpOAuthManager {
       }
 
       const testClient = new Client({
-        name: 'witsy-oauth-detection',
+        name: 'mr-carrots-ai-client-oauth-detection',
         version: '1.0.0'
       }, {
         capabilities: {}
@@ -256,7 +256,7 @@ export default class McpOAuthManager {
         const isOAuthError = this.isOAuthRequiredError(error)
 
         if (isOAuthError) {
-          // OAuth is required - provide standardized Witsy client metadata
+          // OAuth is required - provide standardized fork client metadata
           const scope = await this.getServerSupportedScopes(url)
           const clientMetadata = await this.getClientMetadata(scope)
           console.log(`OAuth required for ${url}:`, error.message)

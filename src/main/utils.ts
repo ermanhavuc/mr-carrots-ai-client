@@ -128,6 +128,6 @@ export const putCachedText = (text: string): string => {
 
 export const getCleanUserAgent = (originalUA: string): string => {
   return originalUA
-    .replace(/Witsy\/\S+\s/, '')
+    .replace(/(Witsy|Mr\. Carrot's AI Client)\/\S+\s/, '')
     .replace(/Electron\/\S+\s/, '')
 }

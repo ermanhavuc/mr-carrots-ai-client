@@ -23,7 +23,7 @@ export async function transcribeWithAppleCLI(
   const cliPath = path.join(assetsFolder, 'apple-speechanalyzer-cli')
 
   // Create temp directory for audio files
-  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'witsy-apple-stt-'))
+  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'mr-carrots-ai-client-apple-stt-'))
   const inputPath = path.join(tempDir, 'input.wav')
   const outputPath = path.join(tempDir, 'output.txt')
 

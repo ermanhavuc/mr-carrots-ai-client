@@ -3,7 +3,7 @@ import { getCleanUserAgent } from './utils'
 
 /**
  * Initialize the webview session with custom user agent
- * Removes "Witsy" and "Electron" from the user agent to avoid detection
+ * Removes app-specific and Electron identifiers from the user agent to avoid detection
  */
 export function initWebviewSession(): void {
   const wvSession = session.fromPartition('persist:webview')

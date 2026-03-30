@@ -70,11 +70,12 @@ if (process.platform !== 'darwin' && !process.env.TEST) {
 }
 
 // changes path
-if (process.env.WITSY_HOME) {
+const customUserDataPath = process.env.MR_CARROT_AI_CLIENT_HOME || process.env.WITSY_HOME
+if (customUserDataPath) {
   const originalGetPath = app.getPath;
   app.getPath = (name: string) => {
     if (name === 'userData') {
-      return process.env.WITSY_HOME;
+      return customUserDataPath;
     } else {
       return originalGetPath(name as any);
     }
@@ -168,8 +169,8 @@ app.whenReady().then(async () => {
   if (process.platform === 'darwin' && !process.env.DEBUG && !process.env.TEST && !app.isInApplicationsFolder()) {
     dialog.showMessageBox({
       type: 'error',
-      message: 'You need to run Witsy from the Applications folder. Move the app icon there and try again.',
-      detail: 'If you already moved the app icon there, make sure you run Witsy from the Applications folder.',
+      message: 'You need to run Mr. Carrot\'s AI Client from the Applications folder. Move the app icon there and try again.',
+      detail: 'If you already moved the app icon there, make sure you run Mr. Carrot\'s AI Client from the Applications folder.',
       buttons: ['OK'],
     });
     quitApp();

@@ -2,7 +2,7 @@
 setlocal EnableDelayedExpansion
 
 echo.
-echo Witsy CLI on Windows is still under development.
+echo Mr. Carrot's AI Client CLI on Windows is still under development.
 echo Stay tuned for updates!
 echo.
 exit /b 1
@@ -13,7 +13,7 @@ for /f "delims=" %%i in ('dir /b /ad /o-n "%~dp0app-*" 2^>nul') do (
     goto :found
 )
 
-echo Error: Could not find Witsy installation
+echo Error: Could not find Mr. Carrot's AI Client installation
 exit /b 1
 
 :found
@@ -29,7 +29,7 @@ if %ERRORLEVEL% EQU 0 (
 
 REM Node.js not found, show error message
 echo.
-echo Witsy CLI requires Node.js to run on Windows.
+echo Mr. Carrot's AI Client CLI requires Node.js to run on Windows.
 echo.
 echo Please install Node.js from: https://nodejs.org/dist/v22.12.0/node-v22.12.0-x64.msi
 echo.

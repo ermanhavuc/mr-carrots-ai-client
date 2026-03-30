@@ -125,11 +125,11 @@ export const initializeWorkspace = (app: App, workspaceId: string): void => {
 
 export const migrateHistoryImagePaths = (history: string, workspaceId: string, platform: string = process.platform): string => {
   if (platform === 'win32') {
-    const r = /file:\/\/(.*?)(\\*)Witsy(\\*)images(\\*)(.*?)/g
-    return history.replaceAll(r, `file://$1$3Witsy$3workspaces${'$3'}${workspaceId}$3images$3$5`)
+    const r = /file:\/\/(.*?)(\\*)(?:Witsy|Mr Carrots AI Client)(\\*)images(\\*)(.*?)/g
+    return history.replaceAll(r, `file://$1$3Mr Carrots AI Client$3workspaces${'$3'}${workspaceId}$3images$3$5`)
   } else {
-    const r = /file:\/\/(.*)\/Witsy\/images\/(.*?)/g
-    return history.replaceAll(r, `file://$1/Witsy/workspaces/${workspaceId}/images/$2`)
+    const r = /file:\/\/(.*)\/(?:Witsy|Mr Carrots AI Client)\/images\/(.*?)/g
+    return history.replaceAll(r, `file://$1/Mr Carrots AI Client/workspaces/${workspaceId}/images/$2`)
   }
 }
 

@@ -69,7 +69,7 @@ export function signDarwinBinaries(buildPath: string, arch: string): void {
  * - All distributed formats (ZIP and installer) contain properly signed binaries
  *
  * Based on actual ZIP contents from v0.8.2 release, the following files need signing:
- * - Main EXE: Witsy.exe
+ * - Main EXE: Mr Carrots AI Client.exe
  * - Chromium DLLs: d3dcompiler_47.dll, ffmpeg.dll, libEGL.dll, libGLESv2.dll, vk_swiftshader.dll, vulkan-1.dll
  * - Native modules: libnut.node, autolib.node (multiple copies), onnxruntime_binding.node
  *
@@ -99,7 +99,7 @@ export function signWindowsBinaries(buildPath: string, arch: string): void {
   // NOTE: afterCopy runs BEFORE ASAR packaging, so paths are at root, not in resources/
   const filesToSign = [
     // Main executable (Electron binary)
-    'Witsy.exe',
+    'Mr Carrots AI Client.exe',
 
     // Chromium DLLs (Electron framework files)
     'd3dcompiler_47.dll',

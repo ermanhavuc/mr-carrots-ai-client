@@ -6,6 +6,8 @@ import * as path from 'path'
 
 import { WorkDirAccess } from './state'
 
+const defaultUserDataFolderName = 'Mr Carrots AI Client'
+
 /**
  * Get the default user data path (same as Electron's app.getPath('userData'))
  * This allows reading cli.json before connecting to the API
@@ -14,11 +16,11 @@ export function getDefaultUserDataPath(): string {
   const home = os.homedir()
   switch (process.platform) {
     case 'darwin':
-      return path.join(home, 'Library', 'Application Support', 'Witsy')
+      return path.join(home, 'Library', 'Application Support', defaultUserDataFolderName)
     case 'win32':
-      return path.join(process.env.APPDATA || path.join(home, 'AppData', 'Roaming'), 'Witsy')
+      return path.join(process.env.APPDATA || path.join(home, 'AppData', 'Roaming'), defaultUserDataFolderName)
     default:
-      return path.join(process.env.XDG_CONFIG_HOME || path.join(home, '.config'), 'Witsy')
+      return path.join(process.env.XDG_CONFIG_HOME || path.join(home, '.config'), defaultUserDataFolderName)
   }
 }
 

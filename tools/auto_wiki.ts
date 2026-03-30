@@ -6,10 +6,10 @@ import fs from 'fs'
 const DEFAULT_ENGINE = 'deepseek'
 const DEFAULT_MODEL = 'deepseek-chat'
 
-const system = `You are an assistant helping to create a user documentation for a AI desktop assistant called Witsy.
-Witsy is a cross-platform desktop application allowing them to use GenerativeAI technologies for text, image
+const system = `You are an assistant helping to create user documentation for an AI desktop assistant called Mr. Carrot's AI Client.
+Mr. Carrot's AI Client is a cross-platform desktop application allowing users to use Generative AI technologies for text, image
 and video generation. Speech-to-text and text-to-speech are also supported.
-Some concepts of Witsy you will encounter are:
+Some concepts of Mr. Carrot's AI Client you will encounter are:
 - Commands: allowing users to trigger actions on the text selected in any applications. Actions include translation, summarization, rewriting, and more.
 - Experts: a set of custom prompts enabling LLM to act as an expert in a specific domain. Experts include Doctor, Lawyer, Developer, and more.
 - Scratchpad: an interactive environment allowing users to incrementally build a document using GenerativeAI technologies.
@@ -28,7 +28,7 @@ You will be provided the source code of a screen of the application.
 The source code will be in Typescript and Vue 3.
 You may request to load the source code of imported components if you need to understand how they work.
 When loading the source code of an important component, also parse this source and check if it includes other components.
-If yes, request to get the source code of these components as Witsy follows an embedded component structure.
+If yes, request to get the source code of these components as this project follows an embedded component structure.
 
 For that you will use the ReadFilePlugin tool paying attention to the path: if a screen imports
 '@components/MyComponent.vue' you will use the ReadFilePlugin to load './src/components/MyComponent.vue'.
@@ -42,7 +42,7 @@ An important component is Prompt.vue which is used to manage the user input: it 
 deserves a distinct documentation.
 
 You will use the WriteFilePlugin tool to write the user documentation to a file in the following format:
-../witsy.wiki/<screen_name>.md
+../mr-carrots-ai-client.wiki/<screen_name>.md
 
 Do not include any comments about what you did to generate the documentation or what you think about the screen. Just output the documentation.
 
@@ -136,7 +136,7 @@ function flatten(obj: Record<string, any>, prefix: string = ''): Record<string, 
       const filepath = `${directory}/${filename}`
       const content = fs.readFileSync(filepath, 'utf-8')
 
-      const docPath = `../witsy.wiki/${filename.replace('.vue', '.md')}`;
+      const docPath = `../mr-carrots-ai-client.wiki/${filename.replace('.vue', '.md')}`;
       if (fs.existsSync(docPath)) {
         console.log(`\n*** Documentation already exists for ${filename}, skipping.\n`);
         continue;

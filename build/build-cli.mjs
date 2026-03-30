@@ -24,7 +24,7 @@ await build({
     'terminal-kit',
   ],
   define: {
-    '__WITSY_VERSION__': JSON.stringify(packageJson.version),
+    '__APP_VERSION__': JSON.stringify(packageJson.version),
   },
   // banner: {
   //   js: '#!/usr/bin/env node',
@@ -81,10 +81,10 @@ for (const dep of deps) {
 const distBin = join(distCli, 'bin');
 mkdirSync(distBin, { recursive: true });
 
-const witsyScript = join(rootDir, 'bin/witsy');
-const witsyCmd = join(rootDir, 'bin/witsy.cmd');
-const witsyPs1 = join(rootDir, 'bin/witsy.ps1');
-cpSync(witsyScript, join(distBin, 'witsy'), { recursive: false });
-cpSync(witsyCmd, join(distBin, 'witsy.cmd'), { recursive: false });
-cpSync(witsyPs1, join(distBin, 'witsy.ps1'), { recursive: false });
+const witsyScript = join(rootDir, 'bin/mrcarrot-ai');
+const witsyCmd = join(rootDir, 'bin/mrcarrot-ai.cmd');
+const witsyPs1 = join(rootDir, 'bin/mrcarrot-ai.ps1');
+cpSync(witsyScript, join(distBin, 'mrcarrot-ai'), { recursive: false });
+cpSync(witsyCmd, join(distBin, 'mrcarrot-ai.cmd'), { recursive: false });
+cpSync(witsyPs1, join(distBin, 'mrcarrot-ai.ps1'), { recursive: false });
 console.log('✓ Copied bin scripts to dist/cli/bin');

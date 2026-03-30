@@ -30,7 +30,7 @@ const waitForReadyState = async (window: BrowserWindow): Promise<void> => {
 }
 
 export const printPdfFromHtml = async (options: PrintPdfOptions): Promise<Buffer> => {
-  const tmpFilePath = path.join(os.tmpdir(), `witsy-pdf-${Date.now()}-${Math.random().toString(36).slice(2)}.html`)
+  const tmpFilePath = path.join(os.tmpdir(), `mr-carrots-ai-client-pdf-${Date.now()}-${Math.random().toString(36).slice(2)}.html`)
   const printWindow = new BrowserWindow({
     show: false,
     width: 1200,

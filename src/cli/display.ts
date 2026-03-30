@@ -6,8 +6,8 @@ import { state } from './state'
 import { ToolExecutionState } from 'multi-llm-ts'
 
 // Version is injected at build time via esbuild define
-declare const __WITSY_VERSION__: string
-const VERSION = typeof __WITSY_VERSION__ !== 'undefined' ? __WITSY_VERSION__ : 'dev'
+declare const __APP_VERSION__: string
+const VERSION = typeof __APP_VERSION__ !== 'undefined' ? __APP_VERSION__ : 'dev'
 
 // override gray
 export const primaryText = chalk.rgb(215, 119, 87)
@@ -31,7 +31,7 @@ export function displayHeader() {
   console.clear()
 
   console.log(`
-${primaryText('  ██  █  ██')}  ${chalk.bold('Witsy CLI')} ${grayText('v' + VERSION)}
+${primaryText('  ██  █  ██')}  ${chalk.bold("Mr. Carrot's AI Client CLI")} ${grayText('v' + VERSION)}
 ${primaryText('  ██ ███ ██')}  ${grayText('AI Assistant · Command Line Interface')}
 ${primaryText('   ███ ███')}   ${grayText(`http://localhost:${state.port}`)}
 `)

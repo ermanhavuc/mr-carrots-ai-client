@@ -1,8 +1,8 @@
-# Witsy AI Assistant - Developer Guide
+# Mr. Carrot's AI Client - Developer Guide
 
 ## Project Overview
 
-Witsy is a cross-platform Electron-based desktop AI assistant that serves as a universal MCP (Model Context Protocol) client. Built with Electron, TypeScript, Vue 3, and Vite, it integrates multiple LLM providers and supports features like chat completion, image generation, speech-to-text, text-to-speech, document search (RAG), and automation capabilities.
+Mr. Carrot's AI Client is a cross-platform Electron-based desktop AI assistant that serves as a universal MCP (Model Context Protocol) client. It is maintained as a fork that started from Witsy. Built with Electron, TypeScript, Vue 3, and Vite, it integrates multiple LLM providers and supports features like chat completion, image generation, speech-to-text, text-to-speech, document search (RAG), and automation capabilities.
 
 ## Architecture & Key Components
 
@@ -122,7 +122,7 @@ and use the `windowMock` in `beforeAll` (or maybe `beforeEach`).
 
 ### Localization
 
-Witsy is localized using `vue-i18n`. All translations are stored in `./locales/*.json` and can be added or modified as needed. The main language is English, and other languages can be added by creating new JSON files in the locales directory. Only add translation for English when creating a new feature. If asked to add translations for other languages you can run `./tools/i18n_check.ts --fix` but never run this based on your own initiative.
+Mr. Carrot's AI Client is localized using `vue-i18n`. All translations are stored in `./locales/*.json` and can be added or modified as needed. The main language is English, and other languages can be added by creating new JSON files in the locales directory. Only add translation for English when creating a new feature. If asked to add translations for other languages you can run `./tools/i18n_check.ts --fix` but never run this based on your own initiative.
 
 In the renderer process, always `import { t } from '@services/i18n'`.
 

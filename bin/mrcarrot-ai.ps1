@@ -5,7 +5,7 @@ Set-StrictMode -Version Latest
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
 Write-Host ""
-Write-Host "Witsy CLI on Windows is still under development."
+Write-Host "Mr. Carrot's AI Client CLI on Windows is still under development."
 Write-Host "Stay tuned for updates!"
 Write-Host ""
 exit 1
@@ -17,7 +17,7 @@ $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 $AppDirs = @(Get-ChildItem -Path $ScriptDir -Directory -Filter "app-*" | Sort-Object Name -Descending)
 
 if ($AppDirs.Count -eq 0) {
-    Write-Host "Error: Could not find Witsy installation"
+    Write-Host "Error: Could not find Mr. Carrot's AI Client installation"
     exit 1
 }
 
@@ -35,7 +35,7 @@ if ($nodeCmd) {
 
 # Node.js not found, show error message
 Write-Host ""
-Write-Host "Witsy CLI requires Node.js to run on Windows."
+Write-Host "Mr. Carrot's AI Client CLI requires Node.js to run on Windows."
 Write-Host ""
 Write-Host "Please install Node.js from: https://nodejs.org/dist/v22.12.0/node-v22.12.0-x64.msi"
 Write-Host ""

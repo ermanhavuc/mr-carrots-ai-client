@@ -69,7 +69,7 @@ async function installMacOSCLI(fallbackMethod: boolean): Promise<boolean> {
   
   const appPath = app.getAppPath()
   const resourcesPath = path.join(appPath, '..', '..', 'Resources')
-  const sourcePath = path.join(resourcesPath, 'cli', 'bin', 'witsy')
+  const sourcePath = path.join(resourcesPath, 'cli', 'bin', 'mrcarrot-ai')
 
   const elevatedInstall = (sourcePath: string, symlinkPath: string) => {
 
@@ -89,7 +89,7 @@ async function installMacOSCLI(fallbackMethod: boolean): Promise<boolean> {
 async function installLinuxCLI(fallbackMethod: boolean): Promise<boolean> {
   const appPath = app.getPath('exe')
   const appDir = path.dirname(appPath)
-  const sourcePath = path.join(appDir, 'resources', 'cli', 'bin', 'witsy')
+  const sourcePath = path.join(appDir, 'resources', 'cli', 'bin', 'mrcarrot-ai')
 
   const elevatedInstall = (sourcePath: string, symlinkPath: string) => {
 
@@ -110,7 +110,7 @@ async function installUnixCLI(
 ): Promise<boolean> {
 
   const t = useI18n(app)
-  const symlinkPath = '/usr/local/bin/witsy'
+  const symlinkPath = '/usr/local/bin/mrcarrot-ai'
 
   try {
     // Check if symlink already exists and is valid
@@ -132,7 +132,7 @@ async function installUnixCLI(
 
       fs.symlinkSync(sourcePath, symlinkPath)
       fs.chmodSync(sourcePath, 0o755)
-      log.info('CLI installed successfully to /usr/local/bin/witsy')
+      log.info('CLI installed successfully to /usr/local/bin/mrcarrot-ai')
 
     } catch {
 
@@ -150,7 +150,7 @@ async function installUnixCLI(
           
           elevatedInstall(sourcePath, symlinkPath)
 
-          log.info('CLI installed successfully to /usr/local/bin/witsy (with elevated privileges)')
+          log.info('CLI installed successfully to /usr/local/bin/mrcarrot-ai (with elevated privileges)')
         
         } catch (elevatedError) {
 
@@ -207,15 +207,15 @@ async function installWindowsCLI(): Promise<boolean> {
 
     for (const ext of ['.cmd', '.ps1']) {
 
-      sourceCmd = path.join(appDir, 'resources', 'cli', 'bin', `witsy${ext}`)
-      const targetCmd = path.join(rootDir, `witsy${ext}`)
+      sourceCmd = path.join(appDir, 'resources', 'cli', 'bin', `mrcarrot-ai${ext}`)
+      const targetCmd = path.join(rootDir, `mrcarrot-ai${ext}`)
 
-      // Copy witsy.ps1 to root directory
+      // Copy CLI wrapper to root directory
       try {
         fs.copyFileSync(sourceCmd, targetCmd)
-        log.info(`Copied witsy${ext} to root:`, targetCmd)
+        log.info(`Copied mrcarrot-ai${ext} to root:`, targetCmd)
       } catch (error) {
-        log.error(`Failed to copy witsy${ext} to root:`, error)
+        log.error(`Failed to copy mrcarrot-ai${ext} to root:`, error)
         return false
       }
 

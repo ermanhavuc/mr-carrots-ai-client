@@ -3,7 +3,7 @@
     "actions": "Akcje",
     "agents": "Agenci",
     "allSelected": "Wszystkie wybrane",
-    "appName": "Witsy",
+    "appName": "Mr. Carrot's AI Client",
     "arguments": "Argumenty",
     "askMeAnything": "Zapytaj mnie o cokolwiek",
     "attach": "Załącz",
@@ -286,7 +286,7 @@
         "jsonSchema": "JSON…",
         "step": "Krok {step}",
         "structuredOutput": {
-          "text": "Określ <a href=\"https://github.com/nbonamy/witsy/wiki/Agents-JSON-format\" target=\"_blank\">prosty schemat JSON</a>, aby zdefiniować oczekiwany format wyjściowy tego kroku.",
+          "text": "Określ <a href=\"https://github.com/ermanhavuc/mr-carrots-ai-client/wiki/Agents-JSON-format\" target=\"_blank\">prosty schemat JSON</a>, aby zdefiniować oczekiwany format wyjściowy tego kroku.",
           "title": "Schemat JSON"
         },
         "systemVar": {
@@ -2661,7 +2661,7 @@
         "none": "Bez zmiany rozmiaru",
         "size": "Zmień rozmiar największego wymiaru do {size} pikseli"
       },
-      "installCLI": "Zainstaluj interfejs wiersza poleceń Witsy",
+      "installCLI": "Zainstaluj interfejs wiersza poleceń Mr. Carrot's AI Client",
       "instructions": {
         "chat_empathic": "@:{'common.chat'} - @:{'settings.llm.instructions.empathic'}",
         "chat_playful": "@:{'common.chat'} - @:{'settings.llm.instructions.playful'}",

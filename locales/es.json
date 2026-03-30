@@ -3,7 +3,7 @@
     "actions": "Acciones",
     "agents": "Agentes",
     "allSelected": "Todos seleccionados",
-    "appName": "Witsy",
+    "appName": "Mr. Carrot's AI Client",
     "arguments": "Argumentos",
     "askMeAnything": "Pregúntame cualquier cosa",
     "attach": "Adjuntar",
@@ -267,7 +267,7 @@
         "jsonSchema": "JSON…",
         "step": "Paso {step}",
         "structuredOutput": {
-          "text": "Especifique un <a href=\"https://github.com/nbonamy/witsy/wiki/Agents-JSON-format\" target=\"_blank\">esquema JSON simple</a> para definir el formato de salida esperado de este paso.",
+          "text": "Especifique un <a href=\"https://github.com/ermanhavuc/mr-carrots-ai-client/wiki/Agents-JSON-format\" target=\"_blank\">esquema JSON simple</a> para definir el formato de salida esperado de este paso.",
           "title": "Esquema JSON"
         },
         "systemVar": {
@@ -2639,7 +2639,7 @@
         "none": "Sin redimensionar",
         "size": "Redimensionar la mayor dimensión a {size} píxeles"
       },
-      "installCLI": "Instalar la Interfaz de Línea de Comandos de Witsy",
+      "installCLI": "Instalar la Interfaz de Línea de Comandos de Mr. Carrot's AI Client",
       "instructions": {
         "chat_empathic": "@:{'common.chat'} - @:{'settings.llm.instructions.empathic'}",
         "chat_playful": "@:{'common.chat'} - @:{'settings.llm.instructions.playful'}",

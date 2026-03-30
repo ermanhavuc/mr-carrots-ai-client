@@ -25,7 +25,7 @@ export default class AutoUpdater {
 
     // basic setup
     const server = 'https://update.electronjs.org'
-    const feed = `${server}/nbonamy/witsy/${process.platform}-${process.arch}/${this.app.getVersion()}`
+    const feed = `${server}/ermanhavuc/mr-carrots-ai-client/${process.platform}-${process.arch}/${this.app.getVersion()}`
     console.log('[update] Checking for updates at', feed)
     autoUpdater.setFeedURL({ url: feed })
 

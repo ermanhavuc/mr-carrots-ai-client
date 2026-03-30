@@ -4,21 +4,21 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Clear Witsy Settings",
+      "label": "Clear Mr Carrots AI Client Settings",
       "type": "shell",
-      "command": "mv ~/Library/Application\\ Support/Witsy/settings.json ~/Library/Application\\ Support/Witsy/settings.json.bak",
+      "command": "mv ~/Library/Application\\ Support/Mr\\ Carrots\\ AI\\ Client/settings.json ~/Library/Application\\ Support/Mr\\ Carrots\\ AI\\ Client/settings.json.bak",
       "problemMatcher": []
     },
     {
-      "label": "Backup Witsy Settings",
+      "label": "Backup Mr Carrots AI Client Settings",
       "type": "shell",
-      "command": "cp ~/Library/Application\\ Support/Witsy/settings.json ~/Library/Application\\ Support/Witsy/settings.json.bak",
+      "command": "cp ~/Library/Application\\ Support/Mr\\ Carrots\\ AI\\ Client/settings.json ~/Library/Application\\ Support/Mr\\ Carrots\\ AI\\ Client/settings.json.bak",
       "problemMatcher": []
     },
     {
-      "label": "Restore Witsy Settings",
+      "label": "Restore Mr Carrots AI Client Settings",
       "type": "shell",
-      "command": "cp ~/Library/Application\\ Support/Witsy/settings.json.bak ~/Library/Application\\ Support/Witsy/settings.json",
+      "command": "cp ~/Library/Application\\ Support/Mr\\ Carrots\\ AI\\ Client/settings.json.bak ~/Library/Application\\ Support/Mr\\ Carrots\\ AI\\ Client/settings.json",
       "problemMatcher": []
     },
     {

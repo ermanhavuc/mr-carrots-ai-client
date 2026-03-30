@@ -1,11 +1,11 @@
 {
-  "name": "witsy",
-  "productName": "Witsy",
+  "name": "mr-carrots-ai-client",
+  "productName": "Mr. Carrot's AI Client",
   "version": "3.6.0",
-  "description": "Witsy: desktop AI assistant",
+  "description": "Mr. Carrot's AI Client: desktop AI assistant",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nbonamy/witsy.git"
+    "url": "https://github.com/ermanhavuc/mr-carrots-ai-client.git"
   },
   "main": ".vite/build/main.js",
   "scripts": {
@@ -26,7 +26,7 @@
     "test:watch": "vitest --watch --silent",
     "test:ci": "vitest --coverage.enabled=true --coverage.reporter='text-summary' --silent",
     "test:ui": "vitest --ui --coverage.enabled=true --silent",
-    "test:e2e": "WITSY_HOME=/tmp vitest --config ./vitest.config.e2e.mjs './tests/e2e/**' ./tests/e2e/**",
+    "test:e2e": "MR_CARROT_AI_CLIENT_HOME=/tmp vitest --config ./vitest.config.e2e.mjs './tests/e2e/**' ./tests/e2e/**",
     "typecheck": "npm run lint",
     "type-check": "npm run typecheck"
   },
@@ -90,10 +90,7 @@
     "vue-tsc": "^3.0.6"
   },
   "keywords": [],
-  "author": {
-    "name": "Nicolas Bonamy",
-    "email": "nicolas@bonamy.fr"
-  },
+  "author": "Erman Havuc",
   "license": "AGPL-3.0-or-later",
   "dependencies": {
     "@a2a-js/sdk": "^0.3.4",
@@ -207,7 +204,7 @@
     "zod": "^3.25.76"
   },
   "build": {
-    "appId": "com.nabocorp.witsy",
+    "appId": "com.ermanhavuc.mrcarrotsaiclient",
     "mac": {
       "icon": "assets/icon.icns",
       "category": "public.app-category.productivity"

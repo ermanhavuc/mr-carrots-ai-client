@@ -365,7 +365,7 @@ export default class Mcp {
 
   getInstallCommand = (registry: string, server: string, apiKey: string): string|null => {  
     if (registry === 'smithery') {
-      let command = `npx -y @smithery/cli@latest install ${server} --client witsy`
+      let command = `npx -y @smithery/cli@latest install ${server} --client mr-carrots-ai-client`
       if (apiKey) {
         command += ` --key ${apiKey}`
       }
@@ -732,10 +732,10 @@ export default class Mcp {
         if (words.length >= 2) {
           const cmd = e.message.split(' ')[1]
           this.logs[server.uuid].push(`Command not found: ${cmd}. Please install it and/or add it to your PATH.\n`)
-          this.logs[server.uuid].push('Check https://github.com/nbonamy/witsy/wiki/MCP-Server-not-starting-on-macOS-and-Linux for more information.')
+          this.logs[server.uuid].push('Check https://github.com/ermanhavuc/mr-carrots-ai-client/wiki/MCP-Server-not-starting-on-macOS-and-Linux for more information.')
         } else {
           this.logs[server.uuid].push('Command not found. Please install it and/or add it to your PATH.\n')
-          this.logs[server.uuid].push('Check https://github.com/nbonamy/witsy/wiki/MCP-Server-not-starting-on-macOS-and-Linux for more information.')
+          this.logs[server.uuid].push('Check https://github.com/ermanhavuc/mr-carrots-ai-client/wiki/MCP-Server-not-starting-on-macOS-and-Linux for more information.')
         }
       }
     }

@@ -165,7 +165,7 @@ describe('Backup functionality', () => {
 
       expect(result).toBe(true)
       expect(extractZip).toHaveBeenCalledWith('/mock/backup.zip', {
-        dir: expect.stringContaining('witsy-restore-')
+        dir: expect.stringContaining('mr-carrots-ai-client-restore-')
       })
     })
 
@@ -215,7 +215,7 @@ describe('Backup functionality', () => {
 
       expect(result).toBe(true)
       expect(fs.rmSync).toHaveBeenCalledWith(
-        expect.stringContaining('witsy-restore-'),
+        expect.stringContaining('mr-carrots-ai-client-restore-'),
         { recursive: true, force: true }
       )
     })

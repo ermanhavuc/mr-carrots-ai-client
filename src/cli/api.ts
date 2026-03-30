@@ -1,4 +1,4 @@
-// Witsy API Client
+// Mr. Carrot's AI Client API Client
 
 import { state } from './state'
 import { ChatCli } from './models'

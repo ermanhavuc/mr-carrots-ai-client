@@ -37,7 +37,7 @@ export default class LocalSearch {
 
     try {
       
-      const response = await this.search('What is Witsy?', 1, true)
+      const response = await this.search("What is Mr. Carrot's AI Client?", 1, true)
       console.log('Test search results:', response.results?.map(r => r.url))
       if (response.results?.length > 0) {
         return true
@@ -401,7 +401,7 @@ export default class LocalSearch {
       },
     })
 
-    // Set clean user agent (strip Witsy and Electron identifiers)
+    // Set clean user agent (strip app and Electron identifiers)
     const originalUA = win.webContents.session.getUserAgent()
     const cleanUA = getCleanUserAgent(originalUA)
     win.webContents.session.setUserAgent(cleanUA)

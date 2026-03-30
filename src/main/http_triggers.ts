@@ -11,7 +11,7 @@ import * as window from './window'
 
 /**
  * Install HTTP trigger endpoints on the server
- * These endpoints allow external applications to trigger Witsy commands via HTTP
+ * These endpoints allow external applications to trigger Mr. Carrot's AI Client commands via HTTP
  */
 export function installHttpTriggers(httpServer: HttpServer, app: App): void {
 
@@ -20,7 +20,7 @@ export function installHttpTriggers(httpServer: HttpServer, app: App): void {
     if (!isHttpEndpointsEnabled(app, res)) return
     sendJson(res, {
       status: 'ok',
-      server: 'witsy-http-triggers',
+      server: 'mr-carrots-ai-client-http-triggers',
       version: '1.0.0'
     })
   })

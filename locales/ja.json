@@ -3,7 +3,7 @@
     "actions": "アクション",
     "agents": "エージェント",
     "allSelected": "すべて選択済み",
-    "appName": "Witsy",
+    "appName": "Mr. Carrot's AI Client",
     "arguments": "引数",
     "askMeAnything": "何でも聞いてください",
     "attach": "添付する",
@@ -286,7 +286,7 @@
         "jsonSchema": "JSON…",
         "step": "ステップ {step}",
         "structuredOutput": {
-          "text": "このステップの期待される出力形式を定義するために、<a href=\"https://github.com/nbonamy/witsy/wiki/Agents-JSON-format\" target=\"_blank\">簡単なJSONスキーマ</a>を指定してください。",
+          "text": "このステップの期待される出力形式を定義するために、<a href=\"https://github.com/ermanhavuc/mr-carrots-ai-client/wiki/Agents-JSON-format\" target=\"_blank\">簡単なJSONスキーマ</a>を指定してください。",
           "title": "JSONスキーマ"
         },
         "systemVar": {
@@ -2661,7 +2661,7 @@
         "none": "リサイズしない",
         "size": "最大寸法を{size}ピクセルにリサイズする"
       },
-      "installCLI": "Witsyコマンドラインインターフェースをインストール",
+      "installCLI": "Mr. Carrot's AI Clientコマンドラインインターフェースをインストール",
       "instructions": {
         "chat_empathic": "@:{'common.chat'} - @:{'settings.llm.instructions.empathic'}",
         "chat_playful": "@:{'common.chat'} - @:{'settings.llm.instructions.playful'}",

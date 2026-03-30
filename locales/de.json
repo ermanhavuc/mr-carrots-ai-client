@@ -3,7 +3,7 @@
     "actions": "Aktionen",
     "agents": "Agenten",
     "allSelected": "Alle ausgewählt",
-    "appName": "Witsy",
+    "appName": "Mr. Carrot's AI Client",
     "arguments": "Argumente",
     "askMeAnything": "Frag mich, was du willst!",
     "attach": "Anhängen",
@@ -267,7 +267,7 @@
         "jsonSchema": "JSON…",
         "step": "Schritt {step}",
         "structuredOutput": {
-          "text": "Geben Sie ein <a href=\"https://github.com/nbonamy/witsy/wiki/Agents-JSON-format\" target=\"_blank\">einfaches JSON-Schema</a> an, um das erwartete Ausgabeformat dieses Schrittes zu definieren.",
+          "text": "Geben Sie ein <a href=\"https://github.com/ermanhavuc/mr-carrots-ai-client/wiki/Agents-JSON-format\" target=\"_blank\">einfaches JSON-Schema</a> an, um das erwartete Ausgabeformat dieses Schrittes zu definieren.",
           "title": "JSON-Schema"
         },
         "systemVar": {
@@ -2639,7 +2639,7 @@
         "none": "Keine Größe",
         "size": "Längste Seite auf {size} Pixel ändern"
       },
-      "installCLI": "Witsy Befehlszeilenschnittstelle installieren",
+      "installCLI": "Mr. Carrot's AI Client Befehlszeilenschnittstelle installieren",
       "instructions": {
         "chat_empathic": "@:{'common.chat'} - @:{'settings.llm.instructions.empathic'}",
         "chat_playful": "@:{'common.chat'} - @:{'settings.llm.instructions.playful'}",
@@ -2902,7 +2902,7 @@
       "localeUI": "UI-Sprache",
       "promptLLMModel": "Quick Prompt LLM-Modell",
       "resetTips": "Tipps zurücksetzen",
-      "runAtLogin": "Witsy mit Betriebssystem starten",
+      "runAtLogin": "Mr. Carrot's AI Client mit Betriebssystem starten",
       "theme": "Erscheinungsbild",
       "themes": {
         "dark": "Dunkel",

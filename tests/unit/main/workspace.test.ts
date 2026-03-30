@@ -312,8 +312,8 @@ describe('migrateHistoryImagePaths', () => {
       "url": "file:///Users/username/Library/Application Support/Witsy/images/image-id.png"
     `
     const darwinOutput = `
-      "content": "[Title](file:///Users/username/Library/Application Support/Witsy/workspaces/0000-0000/images/image-id.png)",
-      "url": "file:///Users/username/Library/Application Support/Witsy/workspaces/0000-0000/images/image-id.png"
+      "content": "[Title](file:///Users/username/Library/Application Support/Mr Carrots AI Client/workspaces/0000-0000/images/image-id.png)",
+      "url": "file:///Users/username/Library/Application Support/Mr Carrots AI Client/workspaces/0000-0000/images/image-id.png"
     `
 
     const win32Input = `
@@ -322,8 +322,8 @@ describe('migrateHistoryImagePaths', () => {
     `
 
     const win32Output = `
-      "content": "[Title](file://C:\\\\Users\\\\username\\\\AppData\\\\Roaming\\\\Witsy\\\\workspaces\\\\0000-0000\\\\images\\\\image-id.png)",
-      "url": "file://C:\\Users\\username\\AppData\\Roaming\\Witsy\\workspaces\\0000-0000\\images\\image-id.png"
+      "content": "[Title](file://C:\\\\Users\\\\username\\\\AppData\\\\Roaming\\\\Mr Carrots AI Client\\\\workspaces\\\\0000-0000\\\\images\\\\image-id.png)",
+      "url": "file://C:\\Users\\username\\AppData\\Roaming\\Mr Carrots AI Client\\workspaces\\0000-0000\\images\\image-id.png"
     `
 
     expect(workspace.migrateHistoryImagePaths(darwinInput, '0000-0000', 'darwin')).toBe(darwinOutput)

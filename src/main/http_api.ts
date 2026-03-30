@@ -15,7 +15,7 @@ import DocumentRepository from './rag/docrepo'
 
 /**
  * Install HTTP API endpoints on the server
- * These endpoints provide CLI access to Witsy functionality
+ * These endpoints provide CLI access to Mr. Carrot's AI Client functionality
  */
 export function installApiEndpoints(httpServer: HttpServer, app: App, mcp: Mcp, docRepo: DocumentRepository): void {
 

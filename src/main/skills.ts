@@ -648,7 +648,7 @@ export const installSkillFromUrl = async (app: App, url: string, installPath: st
 
   fs.mkdirSync(targetRoot, { recursive: true })
 
-  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'witsy-skill-install-'))
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'mr-carrots-ai-client-skill-install-'))
   const zipPath = path.join(tempRoot, 'repo.zip')
   const extractPath = path.join(tempRoot, 'repo')
 
@@ -773,7 +773,7 @@ export const updateSkill = (
     return { success: false, error: `Unknown skill: ${skillId}` }
   }
   if (!isInSystemLocations(app, workspaceId, skill.rootPath)) {
-    return { success: false, error: 'Only skills in Witsy locations can be edited' }
+    return { success: false, error: 'Only skills in application skill locations can be edited' }
   }
 
   try {
