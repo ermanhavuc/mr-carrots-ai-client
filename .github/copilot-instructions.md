@@ -7,14 +7,16 @@ Mr. Carrot's AI Client is a cross-platform Electron-based desktop AI assistant t
 ## Architecture & Key Components
 
 ### Core Structure
+
 - **Main Process** (`src/main/`): Electron main process handling system integration, IPC, and native APIs
-- **Renderer Process** (`src/renderer`): Vue 3 frontend with Vite bundling 
+- **Renderer Process** (`src/renderer`): Vue 3 frontend with Vite bundling
 - **Preload Scripts** (`src/preload.ts`): Secure IPC bridge between main and renderer
 - **LLM Integration** (`src/renderer/services/llms/`): Multi-provider LLM abstraction layer using `multi-llm-ts`
 - **Plugin System** (`src/renderer/services/plugins/`): Extensible tools for search, filesystem, python execution, etc.
 - **Automation** (`src/main/automations/`): Cross-platform automation for "Prompt Anywhere" and AI commands
 
 ### Build System (Electron Forge + Vite)
+
 - **Development**: `npm start` - runs with hot reload
 - **Testing**: `npm test` (Vitest unit tests), `npm run test:e2e` (E2E tests)
 - **Building**: `make mac-arm64`, `make win-x64`, etc. - platform-specific builds via Makefile
@@ -38,31 +40,33 @@ Never try to run the application during your process.
 
 ### State Management
 
-In the renderer process, the state is managed through the store object: 
+In the renderer process, the state is managed through the store object:
 
 ```typescript
-import { store } from '@services/store'
+import { store } from '@services/store';
 ```
 
 This store is a Vue 3 reactive object that holds the application state, including user preferences, conversation history and other relevant data.
 
 ### Configuration Management
+
 ```typescript
 // Centralized config in src/types/config.ts with backwards compatibility
 export type Configuration = {
-  engines: Record<string, EngineConfig>, // LLM provider configs
-  plugins: Record<string, PluginConfig>, // Plugin settings
+  engines: Record<string, EngineConfig>; // LLM provider configs
+  plugins: Record<string, PluginConfig>; // Plugin settings
   // ... other sections
-}
+};
 ```
 
 ### IPC Communication
+
 ```typescript
 // Organized constants in src/ipc_consts.ts
 export const CHAT = {
   STREAM: 'chat-stream',
-  CANCEL: 'chat-cancel'
-} as const
+  CANCEL: 'chat-cancel',
+} as const;
 // Main process handlers in src/main/ipc.ts
 // Preload exposures in src/preload.ts
 ```
@@ -70,18 +74,24 @@ export const CHAT = {
 ### Event System
 
 **IPC Events (main→renderer):** Use `emitIpcEvent`/`emitIpcEventToAll`/`emitIpcEventToFocused` from main and the `useIpcListener` composable in renderer. Handlers are auto-cleaned on component unmount.
+
 ```typescript
-import useIpcListener from '@composables/ipc_listener'
-const { onIpcEvent } = useIpcListener()
-onIpcEvent('docrepo-modified', (data) => { /* handle */ })
+import useIpcListener from '@composables/ipc_listener';
+const { onIpcEvent } = useIpcListener();
+onIpcEvent('docrepo-modified', (data) => {
+  /* handle */
+});
 ```
 
 **Bus Events (renderer↔renderer):** Use `useEventBus` for cross-branch communication between Vue components. Prefer Vue emit/provide-inject for parent-child communication.
+
 ```typescript
-import useEventBus from '@composables/event_bus'
-const { onBusEvent, emitBusEvent } = useEventBus()
-onBusEvent('fullscreen', (data) => { /* handle */ })
-emitBusEvent('new-chat', payload)
+import useEventBus from '@composables/event_bus';
+const { onBusEvent, emitBusEvent } = useEventBus();
+onBusEvent('fullscreen', (data) => {
+  /* handle */
+});
+emitBusEvent('new-chat', payload);
 ```
 
 ### Window API Types
@@ -91,6 +101,7 @@ If you encounter `window.api.*` lint errors, add the method signature to `declar
 ### CSS classes
 
 The project includes a variety of CSS classes available globally:
+
 - variables.css + index.css = base variables and styles
 - form.css = styling of form and form elements
 - split-pane.css + master-detail.css = common layouts
@@ -102,6 +113,7 @@ Make sure you use globally available CSS variables and don't create your own sty
 CSS variable usage is validated with Stylelint. Run `npm run lint:css` to check that all `var(--...)` references use defined variables. The linter imports variable definitions from `css/variables.css` and `css/index.css`.
 
 ### Testing Patterns
+
 - **Unit Tests**: `tests/unit/` using Vitest + Vue Test Utils
 - **Mocking**: LLM providers mocked in tests via `LlmMock` class
 - **Coverage**: Excludes platform-specific automation code and vendor files
@@ -111,11 +123,10 @@ When writing tests, prioritize testing user interactions by triggering HTML even
 
 Never use simulated `wait` statements using an "await Promise" pattern. In most cases awaiting `nextTick` should be sufficient to ensure the UI is updated before assertions. If really needed you can use `vi.waitFor` or `vi.waitUntil` to wait for a specific condition, but this should be avoided unless absolutely necessary and always using a reasonable timeout.
 
-
 All the IPC methods are mocked in `tests/mocks/window.ts`. In most cases, if you need to test IPC calls, you should
 
 ```typescript
-import { useWindowMock } from '@tests/mocks/window'
+import { useWindowMock } from '@tests/mocks/window';
 ```
 
 and use the `windowMock` in `beforeAll` (or maybe `beforeEach`).
@@ -133,12 +144,14 @@ All the CSS variables are defined in `./css/index.css`. Use those variables and 
 ## Common Tasks
 
 ### Running Tests
+
 ```bash
 npm run test:ai            # Unit tests
 npm run test:ci            # With coverage
 ```
 
 ### Analyzing Coverage Gaps
+
 To identify files with the most uncovered lines and prioritize testing efforts:
 
 ```bash

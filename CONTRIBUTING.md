@@ -27,17 +27,19 @@ Use [nvm](https://github.com/nvm-sh/nvm) to switch between Node.js versions.
 Beware that when API Keys Safe Storage is activated, your DEBUG build and RELEASE build will store API keys in distinct locations as one variant cannot read API keys written by the other variant. To handle that you have two options:
 
 - Accept to enter your API keys twice (for each variant)
-- Disable API keys Safe Storage in Settings | Advanced  
+- Disable API keys Safe Storage in Settings | Advanced
 
 ## Translation Contributions
 
 ### Steps
 
 1. **Generate Translation File**: Use the script `./tools/i18n_auto.ts` with the two-letter language code (e.g., "es") and the name of the language in English (e.g., "Spanish").
-2. **Review Translation**: Copy the generated file to a `locales` subfolder of the  data folder. You need to create this folder in:
-  - **Windows**: `%APPDATA%/Mr Carrots AI Client`
-  - **macOS**: `~/Library/Application\ Support/Mr Carrots AI Client`
-  - **Linux**: `~/.config/Mr Carrots AI Client`
+2. **Review Translation**: Copy the generated file to a `locales` subfolder of the data folder. You need to create this folder in:
+
+- **Windows**: `%APPDATA%/Mr Carrots AI Client`
+- **macOS**: `~/Library/Application\ Support/Mr Carrots AI Client`
+- **Linux**: `~/.config/Mr Carrots AI Client`
+
 3. **Reload the App**: Reload the application to review the translation.
 4. **Select your language**: You should see your language in Settings | General. If you do not see the proper flag and name for your language you can add it to `src/components/LangSelect.vue`
 5. **Final Review**: Before committing you can run `./tools/i18n_check.ts` whcih should return no errors and finally `./tools/i18n_sort.ts` to clean your file!

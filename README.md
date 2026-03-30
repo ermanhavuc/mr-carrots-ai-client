@@ -1,4 +1,3 @@
-
 <div align="center">
 
   <img src="assets/icon.png" width="128" alt="Mr. Carrot's AI Client Logo">
@@ -18,7 +17,6 @@ npm ci
 npm start
 ```
 
-
 ## What is Mr. Carrot's AI Client?
 
 Mr. Carrot's AI Client is a BYOK (Bring Your Own Keys) AI application: it means you need to have API keys for the LLM providers you want to use. Alternatively,
@@ -28,18 +26,19 @@ This fork starts from Witsy and keeps the same general goal: a universal MCP cli
 
 ## Supported AI Providers
 
-| Capability | Providers |
-|------------|-----------|
-| **Chat** | OpenAI, Anthropic, Google (Gemini), xAI (Grok), Meta (Llama), Ollama, LM Studio, MistralAI, DeepSeek, OpenRouter, Groq, Cerebras, Azure OpenAI, any provider who supports the OpenAI API standard (together.ai for instance)|
-| **Image Creation** | OpenAI, Google, xAI, Replicate, fal.ai, HuggingFace, Stable Diffusion WebUI |
-| **Video Creation** | OpenAI, Google, Replicate, fal.ai |
-| **Text-to-Speech** | OpenAI, ElevenLabs, Groq, fal.ai |
-| **Speech-to-Text** | OpenAI (Whisper), fal.ai, Fireworks.ai, Gladia, Groq, nVidia, Speechmatics, Local Whisper, Soniox (realtime and async)  any provider who supports the OpenAI API standard |
-| **Search Engines** | Perplexity, Tavily, Brave, Exa, Local Google Search |
-| **MCP Repositories** | Smithery.ai
-| **Embeddings** | OpenAI, Ollama |
+| Capability           | Providers                                                                                                                                                                                                                    |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Chat**             | OpenAI, Anthropic, Google (Gemini), xAI (Grok), Meta (Llama), Ollama, LM Studio, MistralAI, DeepSeek, OpenRouter, Groq, Cerebras, Azure OpenAI, any provider who supports the OpenAI API standard (together.ai for instance) |
+| **Image Creation**   | OpenAI, Google, xAI, Replicate, fal.ai, HuggingFace, Stable Diffusion WebUI                                                                                                                                                  |
+| **Video Creation**   | OpenAI, Google, Replicate, fal.ai                                                                                                                                                                                            |
+| **Text-to-Speech**   | OpenAI, ElevenLabs, Groq, fal.ai                                                                                                                                                                                             |
+| **Speech-to-Text**   | OpenAI (Whisper), fal.ai, Fireworks.ai, Gladia, Groq, nVidia, Speechmatics, Local Whisper, Soniox (realtime and async) any provider who supports the OpenAI API standard                                                     |
+| **Search Engines**   | Perplexity, Tavily, Brave, Exa, Local Google Search                                                                                                                                                                          |
+| **MCP Repositories** | Smithery.ai                                                                                                                                                                                                                  |
+| **Embeddings**       | OpenAI, Ollama                                                                                                                                                                                                               |
 
 Non-exhaustive feature list:
+
 - Chat completion with vision models support (describe an image)
 - Text-to-image and text-to video
 - Image-to-image (image editing) and image-to-video
@@ -79,6 +78,7 @@ npm start
 ## Prerequisites
 
 To use OpenAI, Anthropic, Google or Mistral AI models, you need to enter your API key:
+
 - [OpenAI](https://platform.openai.com/api-keys)
 - [Anthropic](https://console.anthropic.com/settings/keys)
 - [Google](https://aistudio.google.com/app/apikey)
@@ -92,14 +92,15 @@ To use OpenAI, Anthropic, Google or Mistral AI models, you need to enter your AP
 
 To use Ollama models, you need to install [Ollama](https://ollama.com) and download some [models](https://ollama.com/search).
 
-To use text-to-speech, you need an 
+To use text-to-speech, you need an
+
 - [OpenAI API key](https://platform.openai.com/api-keys).
 - [Fal.ai API Key](https://fal.ai/dashboard/keys)
 - [Fireworks.ai API Key](https://app.fireworks.ai/settings/users/api-keys)
 - [Groq API Key](https://console.groq.com/keys)
 - [Speechmatics API Key](https://portal.speechmatics.com/settings/api-keys)
-- [Gladia API Key](https://app.gladia.io/account) 
-  
+- [Gladia API Key](https://app.gladia.io/account)
+
 To use Internet search you need a [Tavily API key](https://app.tavily.com/home).
 
 <p align="center">
@@ -109,6 +110,7 @@ To use Internet search you need a [Tavily API key](https://app.tavily.com/home).
 ## Prompt Anywhere
 
 Generate content in any application:
+
 - From any editable content in any application
 - Hit the Prompt anywhere shortcut (Shift+Control+Space / ^⇧Space)
 - Enter your prompt in the window that pops up
@@ -119,6 +121,7 @@ On Mac, you can define an expert that will automatically be triggered depending 
 ## AI Commands
 
 AI commands are quick helpers accessible from a shortcut that leverage LLM to boost your productivity:
+
 - Select any text in any application
 - Hit the AI command shorcut (Alt+Control+Space / ⌃⌥Space)
 - Select one of the commands and let LLM do their magic!
@@ -156,6 +159,7 @@ You can connect each chat with a document repository: Mr. Carrot's AI Client wil
 You can transcribe audio recorded on the microphone to text. Transcription can be done using a variety of state of the art speech to text models (which require API key) or using local Whisper model (requires download of large files).
 
 Currently Mr. Carrot's AI Client supports the following speech to text models:
+
 - GPT4o-Transcribe
 - Gladia
 - Speechmatics (Standards + Enhanced)
@@ -163,7 +167,7 @@ Currently Mr. Carrot's AI Client supports the following speech to text models:
 - Fireworks.ai Realtime Transcription
 - fal.ai Wizper V3
 - fal.ai ElevenLabs
-- nVidia Microsoft Phi-4 Multimodal 
+- nVidia Microsoft Phi-4 Multimodal
 
 Mr. Carrot's AI Client supports quick shortcuts, so your transcript is always only one button press away.
 
@@ -188,6 +192,7 @@ The HTTP server runs on localhost only by default. If you need external access, 
 ### Finding the Server Port
 
 The current HTTP server port is displayed in the tray menu below the Settings option:
+
 - **macOS/Linux**: Check the fountain pen icon in the menu bar
 - **Windows**: Check the fountain pen icon in the system tray
 
@@ -195,24 +200,24 @@ The current HTTP server port is displayed in the tray menu below the Settings op
 
 All endpoints support both `GET` (with query parameters) and `POST` (with JSON or form-encoded body) requests.
 
-| Endpoint | Description | Optional Parameters |
-|----------|-------------|---------------------|
-| `GET /api/health` | Server health check | - |
-| `GET/POST /api/chat` | Open main window in chat view | `text` - Pre-fill chat input |
-| `GET/POST /api/scratchpad` | Open scratchpad | - |
-| `GET/POST /api/settings` | Open settings window | - |
-| `GET/POST /api/studio` | Open design studio | - |
-| `GET/POST /api/forge` | Open agent forge | - |
-| `GET/POST /api/realtime` | Open realtime chat (voice mode) | - |
-| `GET/POST /api/prompt` | Trigger Prompt Anywhere | `text` - Pre-fill prompt |
-| `GET/POST /api/command` | Trigger AI command picker | `text` - Pre-fill command text |
-| `GET/POST /api/transcribe` | Start transcription/dictation | - |
-| `GET/POST /api/readaloud` | Start read aloud | - |
-| `GET /api/engines` | List available AI engines | Returns configured chat engines |
-| `GET /api/models/:engine` | List models for an engine | Returns available models for specified engine |
-| `POST /api/complete` | Run chat completion | `stream` (default: true), `engine`, `model`, `thread` (Message[]) |
-| `GET/POST /api/agent/run/:token` | Trigger agent execution via webhook | Query params passed as prompt inputs |
-| `GET /api/agent/status/:token/:runId` | Check agent execution status | Returns status, output, and error |
+| Endpoint                              | Description                         | Optional Parameters                                               |
+| ------------------------------------- | ----------------------------------- | ----------------------------------------------------------------- |
+| `GET /api/health`                     | Server health check                 | -                                                                 |
+| `GET/POST /api/chat`                  | Open main window in chat view       | `text` - Pre-fill chat input                                      |
+| `GET/POST /api/scratchpad`            | Open scratchpad                     | -                                                                 |
+| `GET/POST /api/settings`              | Open settings window                | -                                                                 |
+| `GET/POST /api/studio`                | Open design studio                  | -                                                                 |
+| `GET/POST /api/forge`                 | Open agent forge                    | -                                                                 |
+| `GET/POST /api/realtime`              | Open realtime chat (voice mode)     | -                                                                 |
+| `GET/POST /api/prompt`                | Trigger Prompt Anywhere             | `text` - Pre-fill prompt                                          |
+| `GET/POST /api/command`               | Trigger AI command picker           | `text` - Pre-fill command text                                    |
+| `GET/POST /api/transcribe`            | Start transcription/dictation       | -                                                                 |
+| `GET/POST /api/readaloud`             | Start read aloud                    | -                                                                 |
+| `GET /api/engines`                    | List available AI engines           | Returns configured chat engines                                   |
+| `GET /api/models/:engine`             | List models for an engine           | Returns available models for specified engine                     |
+| `POST /api/complete`                  | Run chat completion                 | `stream` (default: true), `engine`, `model`, `thread` (Message[]) |
+| `GET/POST /api/agent/run/:token`      | Trigger agent execution via webhook | Query params passed as prompt inputs                              |
+| `GET /api/agent/status/:token/:runId` | Check agent execution status        | Returns status, output, and error                                 |
 
 ### Example Usage
 
@@ -283,6 +288,7 @@ Mr. Carrot's AI Client includes a command-line interface that allows you to inte
 **Installation**
 
 The CLI is automatically installed when you launch Mr. Carrot's AI Client for the first time:
+
 - **macOS**: Creates a symlink at `/usr/local/bin/mrcarrot-ai` (requires admin password)
 - **Windows**: Adds the CLI to your user PATH (restart terminal for changes to take effect)
 - **Linux**: Creates a symlink at `/usr/local/bin/mrcarrot-ai` (uses pkexec if needed)
@@ -298,6 +304,7 @@ mrcarrot-ai
 The CLI will connect to your running Mr. Carrot's AI Client application and provide an interactive chat interface. It uses the same configuration (engine, model, API keys) as your desktop application.
 
 **Available Commands**
+
 - `/help` - Show available commands
 - `/model` - Select engine and model
 - `/port` - Change server port (default: 4321)
@@ -306,6 +313,7 @@ The CLI will connect to your running Mr. Carrot's AI Client application and prov
 - `/exit` - Exit the CLI
 
 **Requirements**
+
 - Mr. Carrot's AI Client desktop application must be running
 - HTTP API server enabled (default port: 4321)
 
@@ -316,18 +324,21 @@ The `/api/complete` endpoint provides programmatic access to Mr. Carrot's AI Cli
 **Endpoint**: `POST /api/complete`
 
 **Request body**:
+
 ```json
 {
-  "stream": "true",       // Optional: "true" (default) for SSE streaming, "false" for JSON response
-  "engine": "openai",     // Optional: defaults to configured engine in settings
-  "model": "gpt-4",       // Optional: defaults to configured model for the engine
-  "thread": [             // Required: array of messages
-    {"role": "user", "content": "Your prompt here"}
+  "stream": "true", // Optional: "true" (default) for SSE streaming, "false" for JSON response
+  "engine": "openai", // Optional: defaults to configured engine in settings
+  "model": "gpt-4", // Optional: defaults to configured model for the engine
+  "thread": [
+    // Required: array of messages
+    { "role": "user", "content": "Your prompt here" }
   ]
 }
 ```
 
 **Response (non-streaming, `stream: "false"`):**
+
 ```json
 {
   "success": true,
@@ -344,6 +355,7 @@ The `/api/complete` endpoint provides programmatic access to Mr. Carrot's AI Cli
 
 **Response (streaming, `stream: "true"`):**
 Server-Sent Events (SSE) format with chunks:
+
 ```
 data: {"type":"content","text":"Hello","done":false}
 data: {"type":"content","text":" world","done":false}
@@ -351,31 +363,37 @@ data: [DONE]
 ```
 
 **List Engines:**
+
 ```bash
 curl http://localhost:8090/api/engines
 ```
+
 Response:
+
 ```json
 {
   "engines": [
-    {"id": "openai", "name": "OpenAI"},
-    {"id": "anthropic", "name": "Anthropic"},
-    {"id": "google", "name": "Google"}
+    { "id": "openai", "name": "OpenAI" },
+    { "id": "anthropic", "name": "Anthropic" },
+    { "id": "google", "name": "Google" }
   ]
 }
 ```
 
 **List Models for an Engine:**
+
 ```bash
 curl http://localhost:8090/api/models/openai
 ```
+
 Response:
+
 ```json
 {
   "engine": "openai",
   "models": [
-    {"id": "gpt-4", "name": "GPT-4"},
-    {"id": "gpt-3.5-turbo", "name": "GPT-3.5 Turbo"}
+    { "id": "gpt-4", "name": "GPT-4" },
+    { "id": "gpt-3.5-turbo", "name": "GPT-3.5 Turbo" }
   ]
 }
 ```
@@ -385,9 +403,11 @@ Response:
 Mr. Carrot's AI Client includes a command-line interface for interacting with AI models directly from your terminal.
 
 **Requirements:**
+
 - Mr. Carrot's AI Client application must be running (for the HTTP API server)
 
 **Launch the CLI:**
+
 ```bash
 npm run cli
 ```
@@ -403,6 +423,7 @@ Agent webhooks allow you to trigger agent execution via HTTP requests, enabling 
 #### How It Works
 
 **Setting up a webhook:**
+
 1. Open the Agent Forge and select or create an agent
 2. Navigate to the "Invocation" tab (last step in the wizard)
 3. Check the "🌐 Webhook" checkbox
@@ -411,6 +432,7 @@ Agent webhooks allow you to trigger agent execution via HTTP requests, enabling 
 6. You can regenerate the token at any time using the refresh button
 
 **Using the webhook:**
+
 - Send GET or POST requests to the webhook URL
 - Include parameters as query strings (GET) or JSON body (POST)
 - Parameters are automatically passed to the agent's prompt as input variables
@@ -418,6 +440,7 @@ Agent webhooks allow you to trigger agent execution via HTTP requests, enabling 
 - The webhook returns immediately with a `runId` and `statusUrl` for checking execution status
 
 **Example agent prompt:**
+
 ```
 Please process the following task: {task}
 User: {user}
@@ -425,6 +448,7 @@ Priority: {priority}
 ```
 
 **Triggering the agent:**
+
 ```bash
 # Using GET with query parameters
 curl "http://localhost:8090/api/agent/run/abc12345?task=backup&user=john&priority=high"
@@ -436,6 +460,7 @@ curl -X POST http://localhost:8090/api/agent/run/abc12345 \
 ```
 
 **Run response:**
+
 ```json
 {
   "success": true,
@@ -445,12 +470,14 @@ curl -X POST http://localhost:8090/api/agent/run/abc12345 \
 ```
 
 **Checking execution status:**
+
 ```bash
 # Use the statusUrl from the webhook response (relative path)
 curl "http://localhost:8090/api/agent/status/abc12345/550e8400-e29b-41d4-a716-446655440000"
 ```
 
 **Status response (running):**
+
 ```json
 {
   "success": true,
@@ -464,6 +491,7 @@ curl "http://localhost:8090/api/agent/status/abc12345/550e8400-e29b-41d4-a716-44
 ```
 
 **Status response (success):**
+
 ```json
 {
   "success": true,
@@ -478,6 +506,7 @@ curl "http://localhost:8090/api/agent/status/abc12345/550e8400-e29b-41d4-a716-44
 ```
 
 **Status response (error):**
+
 ```json
 {
   "success": true,
@@ -497,7 +526,6 @@ curl "http://localhost:8090/api/agent/status/abc12345/550e8400-e29b-41d4-a716-44
 - [ ] Proper database (SQLite3) storage (??)
 
 ## WIP
-
 
 ## DONE
 
@@ -585,7 +613,7 @@ curl "http://localhost:8090/api/agent/status/abc12345/550e8400-e29b-41d4-a716-44
 - [x] Google function calling
 - [x] Anthropic function calling
 - [x] Scratchpad
-- [x] Dictation: OpenAI Whisper + Whisper WebGPU 
+- [x] Dictation: OpenAI Whisper + Whisper WebGPU
 - [x] Auto-select expert based on foremost app (Mac only)
 - [x] Cerebras support
 - [x] Local files RAG

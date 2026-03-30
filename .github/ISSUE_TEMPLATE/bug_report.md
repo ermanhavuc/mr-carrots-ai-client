@@ -4,7 +4,6 @@ about: Create a report to help us improve
 title: ''
 labels: ''
 assignees: ''
-
 ---
 
 **Describe the bug**
@@ -12,6 +11,7 @@ A clear and concise description of what the bug is.
 
 **To Reproduce**
 Steps to reproduce the behavior:
+
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
@@ -26,8 +26,9 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem. If your issue is related to an interaction with a model, please also include screenshots of the Debug Console when available.
 
 **Desktop (please complete the following information):**
- - OS: [e.g. macOS 15, Windows 11]
- - Mr. Carrot's AI Client Version [e.g. 3.6.0]
+
+- OS: [e.g. macOS 15, Windows 11]
+- Mr. Carrot's AI Client Version [e.g. 3.6.0]
 
 **Additional context**
 Add any other context about the problem here.
