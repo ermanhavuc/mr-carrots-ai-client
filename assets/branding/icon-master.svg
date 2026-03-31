@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" fill="none">
+  <defs>
+
+    <linearGradient id="bgGradient" x1="80" y1="70" x2="930" y2="950" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF9EF"/>
+      <stop offset="1" stop-color="#F6E7C8"/>
+    </linearGradient>
+    <linearGradient id="carrotGradient" x1="-90" y1="40" x2="100" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F28C28"/>
+      <stop offset="1" stop-color="#F45D22"/>
+    </linearGradient>
+    <linearGradient id="leafGradient" x1="-90" y1="-180" x2="110" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38A34A"/>
+      <stop offset="1" stop-color="#1E7A33"/>
+    </linearGradient>
+    <linearGradient id="sparkGradient" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2AA6B3"/>
+      <stop offset="1" stop-color="#5A3D73"/>
+    </linearGradient>
+    <radialGradient id="haloGradient" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(760 780) rotate(135) scale(420 360)">
+      <stop stop-color="#F28C28" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#F28C28" stop-opacity="0"/>
+    </radialGradient>
+  
+  </defs>
+
+  <rect width="1024" height="1024" rx="210" fill="url(#bgGradient)"/>
+  <circle cx="760" cy="780" r="350" fill="url(#haloGradient)"/>
+  <rect x="52" y="52" width="920" height="920" rx="180" stroke="#E9D1AE" stroke-width="4" opacity="0.45"/>
+  <path d="M146 756 C 242 852 338 894 448 898" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round" opacity="0.35"/>
+  <path d="M590 140 C 742 166 844 240 914 354" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" opacity="0.2"/>
+  
+
+
+  <g transform="translate(474 404) rotate(-18) scale(1.42)">
+    <path d="M0 10 C72 58 95 184 58 300 C42 350 16 380 0 390 C-16 380 -42 350 -58 300 C-95 184 -72 58 0 10 Z" fill="url(#carrotShadow)" opacity="0.18" transform="translate(12 24)"/>
+    <path d="M0 0 C72 48 96 176 58 292 C42 342 16 372 0 382 C-16 372 -42 342 -58 292 C-96 176 -72 48 0 0 Z" fill="url(#carrotGradient)"/>
+    <path d="M-18 -26 C-66 -70 -72 -132 -42 -162 C-2 -148 18 -112 18 -58 C-4 -42 -10 -34 -18 -26 Z" fill="url(#leafGradient)"/>
+    <path d="M18 -22 C-4 -84 8 -150 52 -172 C86 -140 82 -94 48 -40 C32 -28 28 -24 18 -22 Z" fill="url(#leafGradient)"/>
+    <path d="M2 -40 C-14 -98 12 -174 78 -206 C114 -154 94 -82 36 -30 C18 -28 10 -30 2 -40 Z" fill="url(#leafGradient)"/>
+  </g>
+  <path d="M648 694 L724 606 L738 660 L792 672 L710 754 Z" fill="url(#sparkGradient)"/>
+  <circle cx="720" cy="236" r="28" fill="#2AA6B3" opacity="0.25"/>
+  <circle cx="760" cy="196" r="14" fill="#2AA6B3"/>
+  <circle cx="806" cy="242" r="10" fill="#5A3D73"/>
+  
+</svg>

@@ -1,5 +1,7 @@
 # Implementation Plan for Issue #479: Message Editing Features
 
+Archived note: this plan predates the fork and still references the original Witsy issue tracker for historical context.
+
 GitHub Issue: https://github.com/nbonamy/witsy/issues/479
 
 ## Overview

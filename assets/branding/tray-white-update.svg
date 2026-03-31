@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <defs>
+
+  </defs>
+
+
+  <g transform="translate(30 34) rotate(-18)">
+    <path d="M0 -2 C18 9 24 39 14 67 C10 79 3 88 0 90 C-3 88 -10 79 -14 67 C-24 39 -18 9 0 -2 Z" fill="#FFFFFF"/>
+    <path d="M-6 -12 C-19 -24 -20 -40 -12 -48 C-1 -44 4 -34 4 -20 C-2 -16 -4 -14 -6 -12 Z" fill="#FFFFFF"/>
+    <path d="M6 -10 C0 -27 3 -42 15 -48 C24 -38 22 -24 14 -12 C10 -9 8 -9 6 -10 Z" fill="#FFFFFF"/>
+    <path d="M0 -16 C-5 -31 4 -50 22 -58 C31 -43 26 -24 10 -10 C4 -10 1 -11 0 -16 Z" fill="#FFFFFF"/>
+  </g>
+  <circle cx="46" cy="18" r="8" fill="#FFFFFF"/>
+</svg>

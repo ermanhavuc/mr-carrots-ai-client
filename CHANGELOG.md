@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
+Note: this repository started as a fork of Witsy. Historical entries and issue links before the fork point may still reference the original project and are kept for traceability.
+
 ## [3.6.0] - WIP
 
 ### Added

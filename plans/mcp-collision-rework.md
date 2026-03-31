@@ -1,10 +1,12 @@
 # MCP Collision Management Rework
 
+Archived note: this document started before the fork. Some Witsy references remain where they identify upstream behavior that was retrofitted into this repository.
+
 ## Overview
 
-Retrofit the improved MCP tool name collision handling from station1-desktop to Witsy. The new approach only adds suffixes when there's an actual collision (instead of suffixing ALL tools), and persists mappings for consistency across restarts.
+Retrofit the improved MCP tool name collision handling from station1-desktop to the app. The new approach only adds suffixes when there's an actual collision (instead of suffixing ALL tools), and persists mappings for consistency across restarts.
 
-## Current State (Witsy)
+## Current State (Pre-Fork)
 
 - All MCP tools get `___xxxx` suffix (last 4 chars of server UUID)
 - No collision detection - just blanket suffixing
@@ -20,7 +22,7 @@ Retrofit the improved MCP tool name collision handling from station1-desktop to 
 
 ## Key Differences
 
-| Aspect | Old (Witsy) | New |
+| Aspect | Old (Pre-Fork) | New |
 |--------|-------------|-----|
 | Suffix format | `___xxxx` (4 hex chars) | `_N` (incremental) |
 | When applied | ALL tools | Only collisions |
@@ -76,13 +78,13 @@ Retrofit the improved MCP tool name collision handling from station1-desktop to 
   - `stripOldToolSuffix(toolName)` function
   - `hasOldToolSuffix(toolName)` function
   - `migrateSettingsMcpToolNames(app)` main migration function
-- [x] Migrate stored tool references in (Witsy-specific):
+- [x] Migrate stored tool references in (app-specific):
   - `config.llm.defaults[].tools[]` - per-model tool selection
   - `config.prompt.tools[]` - prompt anywhere tools
   - `config.realtime.tools[]` - realtime voice tools
 - [x] Hook migration into app startup in `src/main.ts`
 
-**Note:** Witsy doesn't have workspaces, personas, operators, or agents - migration is simpler than station1-desktop.
+**Note:** This app doesn't have workspaces, personas, operators, or agents in the relevant config path, so migration is simpler than station1-desktop.
 
 **Commit:** `feat: add migration to strip old MCP tool suffixes`
 
@@ -138,7 +140,7 @@ Retrofit the improved MCP tool name collision handling from station1-desktop to 
 
 1. **Match station1 code structure** - Code should be nearly identical for easier merge
 2. **Instance methods over static** - Use `mcp.originalToolName()` not `Mcp.originalToolName()`
-3. **Legacy config handling** - Witsy has `mcpServers` (old) and `mcp.servers` (new) formats
+3. **Legacy config handling** - the pre-fork app had `mcpServers` (old) and `mcp.servers` (new) formats
 4. **Suffix format** - `_N` chosen because dots may not be valid in MCP tool names
 5. **64-char limit** - MCP spec - truncate base name, never suffix
 6. **Original name for calls** - Always call MCP server with ORIGINAL name, not mapped name
@@ -160,7 +162,7 @@ Retrofit the improved MCP tool name collision handling from station1-desktop to 
 - **Low Risk:** Core collision logic is well-tested in station1-desktop ✅ Confirmed
 - **Low Risk:** IPC changes are backward compatible ✅ Confirmed
 
-## Tool Storage Locations (Witsy)
+## Tool Storage Locations (Pre-Fork)
 
 Confirmed - tool names are stored in only 3 places:
 - `config.llm.defaults[].tools[]` - per-model tool selection

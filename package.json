@@ -17,6 +17,7 @@
     "lint": "eslint '**/*.{ts,vue}' && echo '0 linting error' && vue-tsc --noEmit --project tsconfig.lint.json && echo '0 TypeScript error' && stylelint '**/*.{css,vue}' && echo '0 CSS error'",
     "lint:css": "stylelint '**/*.{css,vue}'",
     "lint:watch": "node build/lint-watch.mjs",
+    "brand:assets": "node tools/generate_brand_assets.mjs",
     "credits": "npx @opengovsg/credits-generator",
     "cli": "tsx src/cli/main.ts",
     "build:cli": "node build/build-cli.mjs",

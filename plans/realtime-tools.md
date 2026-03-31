@@ -1,5 +1,7 @@
 # Realtime Chat Tool Integration
 
+Archived note: this design document started before the Mr. Carrot's AI Client fork. Remaining references to Witsy describe the pre-fork implementation context.
+
 ## Goal
 
 Rewrite RealtimeChat.vue to enable tool usage following the [OpenAI Agents JS quickstart guide](https://openai.github.io/openai-agents-js/guides/voice-agents/quickstart/).
@@ -14,7 +16,7 @@ Rewrite RealtimeChat.vue to enable tool usage following the [OpenAI Agents JS qu
 ## Target Architecture
 
 - **OpenAI Agents SDK**: Use `RealtimeAgent` and `RealtimeSession` from `@openai/agents`
-- **Tool integration**: Convert Witsy's plugin system to OpenAI agent tools format
+- **Tool integration**: Convert the app's plugin system to OpenAI agent tools format
 - **Unified patterns**: Leverage existing plugin architecture (search, browse, filesystem, python, etc.)
 - **Maintain features**: Keep cost tracking, voice selection, model selection
 
@@ -35,7 +37,7 @@ Rewrite RealtimeChat.vue to enable tool usage following the [OpenAI Agents JS qu
 
 ### Phase 2: Create Tool Adapter Layer
 
-**Note**: multi-llm-ts already converts Witsy plugins to OpenAI API format via `engine.getAvailableTools()`. We need to adapt from OpenAI API format to OpenAI Agents SDK format (which uses Zod schemas and the `tool()` helper).
+**Note**: multi-llm-ts already converts the app plugins to OpenAI API format via `engine.getAvailableTools()`. We need to adapt from OpenAI API format to OpenAI Agents SDK format (which uses Zod schemas and the `tool()` helper).
 
 **2.1 Create tool conversion utilities**
 - Create `src/renderer/services/realtime_tools.ts`
@@ -73,7 +75,7 @@ Rewrite RealtimeChat.vue to enable tool usage following the [OpenAI Agents JS qu
   import { RealtimeAgent, RealtimeSession } from '@openai/agents'
 
   const agent = new RealtimeAgent({
-    name: 'Witsy Realtime Assistant',
+    name: "Mr. Carrot's Realtime Assistant",
     instructions: 'You are a helpful assistant...',
     model: model.value,
     voice: voice.value,
